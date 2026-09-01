@@ -1,0 +1,219 @@
+/* ==========================================
+   MINIMAL CSS FIX & CLEANUP FOR MINDGOLD
+   Retained all custom hex styling, neon glow & animations
+   ========================================== */
+
+/* 1. Global Reset & Theme Base */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-dark: #120524;
+  --bg-card: #1a0b36;
+  --accent-gold: #ffd700;
+  --accent-cyan: #00f2fe;
+  --accent-blue: #4facfe;
+  --text-main: #ffffff;
+  --text-muted: #a0a5c0;
+  --success-glow: rgba(46, 204, 113, 0.6);
+  --error-glow: rgba(231, 76, 60, 0.6);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Background Canvas */
+/* #circuit-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  pointer-events: none;
+} */
+
+#circuit-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  pointer-events: none;
+  background: var(--bg-dark); /* или linear-gradient(135deg, #120524 0%, #0a0314 100%) */
+}
+
+/* Layout Containers */
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 1rem;
+}
+
+.main-content {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+}
+
+/* Splash Hero Title Section */
+.hero-section {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.brand-title {
+  font-size: 3.5rem;
+  font-weight: 900;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #ffffff 0%, #ffd700 50%, #ff8c00 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0 0 0.5rem 0;
+  text-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+}
+
+.brand-tagline {
+  font-size: 1.25rem;
+  color: var(--accent-cyan);
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+/* RENAMED ACTION BUTTONS  */
+.action-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  width: 100%;
+  max-width: 600px;
+}
+
+.btn-game-action {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1.2rem 2.5rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-decoration: none;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  flex: 1 1 240px;
+}
+
+.btn-game-action:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.6);
+}
+
+.btn-game-action:active {
+  transform: translateY(-1px);
+}
+
+/* Action Variants */
+.btn-game-action.btn-editor {
+  background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+  box-shadow: 0 6px 20px rgba(56, 239, 125, 0.3);
+}
+
+.btn-game-action.btn-editor:hover {
+  box-shadow: 0 10px 30px rgba(56, 239, 125, 0.5);
+}
+
+.btn-game-action.btn-play {
+  background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
+  box-shadow: 0 6px 20px rgba(255, 65, 108, 0.3);
+}
+
+.btn-game-action.btn-play:hover {
+  box-shadow: 0 10px 30px rgba(255, 65, 108, 0.5);
+}
+
+.btn-game-action.btn-cheatsheet {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  box-shadow: 0 6px 20px rgba(0, 242, 254, 0.3);
+}
+
+/* HEXAGONAL BUTTONS (Custom & Preserved) */
+.btn-hex {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #2b1055, #7597de);
+  color: #fff;
+  font-weight: 700;
+  clip-path: polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-hex:hover {
+  filter: brightness(1.2);
+  transform: scale(1.05);
+}
+
+/* ANSWER SELECTION HIGHLIGHTS (Preserved) */
+.ans-option {
+  background-color: var(--bg-card);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 1rem 1.5rem;
+  color: #fff;
+  font-size: 1.1rem;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.ans-option:hover {
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
+}
+
+.ans-correct {
+  background-color: rgba(46, 204, 113, 0.2) !important;
+  border-color: #2ecc71 !important;
+  box-shadow: 0 0 20px var(--success-glow) !important;
+}
+
+.ans-wrong {
+  background-color: rgba(231, 76, 60, 0.2) !important;
+  border-color: #e74c3c !important;
+  box-shadow: 0 0 20px var(--error-glow) !important;
+}
+
+/* Footer Styling */
+.footer {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  padding: 1rem 0;
+}
