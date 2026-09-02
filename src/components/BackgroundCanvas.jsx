@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
 
 export default function BackgroundCanvas() {
   const canvasRef = useRef(null);
@@ -6,7 +6,7 @@ export default function BackgroundCanvas() {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
 
     let width = 0;
     let height = 0;
@@ -130,7 +130,7 @@ export default function BackgroundCanvas() {
 
       ctx.strokeStyle = `rgba(241,196,15,${trace.fade})`;
       ctx.lineWidth = 1.5;
-      ctx.lineCap = 'round';
+      ctx.lineCap = "round";
       ctx.stroke();
     }
 
@@ -153,8 +153,8 @@ export default function BackgroundCanvas() {
       if (!p) return;
 
       ctx.shadowBlur = 8;
-      ctx.shadowColor = 'rgba(255,255,200,0.8)';
-      ctx.fillStyle = 'white';
+      ctx.shadowColor = "rgba(255,255,200,0.8)";
+      ctx.fillStyle = "white";
       ctx.beginPath();
       ctx.arc(p.x, p.y, 2.5, 0, Math.PI * 2);
       ctx.fill();
@@ -191,8 +191,7 @@ export default function BackgroundCanvas() {
         Math.random() < 0.05 &&
         liveTraces.length
       ) {
-        const trace =
-          liveTraces[Math.floor(Math.random() * liveTraces.length)];
+        const trace = liveTraces[Math.floor(Math.random() * liveTraces.length)];
         if (trace.progress > 0.6) {
           signals.push({
             trace,
@@ -207,10 +206,8 @@ export default function BackgroundCanvas() {
     }
 
     function draw() {
-    //   ctx.fillStyle = 'rgba(0,0,0,0.08)';
-    //   ctx.fillRect(0, 0, width, height);
-    ctx.fillStyle = 'rgba(18, 5, 36, 0.12)'; // подмешивает тёмно-синий/фиолетовый в шлейф
-  ctx.fillRect(0, 0, width, height);
+      ctx.fillStyle = "rgba(18, 5, 36, 0.12)";
+      ctx.fillRect(0, 0, width, height);
 
       for (let t of liveTraces) {
         drawPartial(t);
@@ -240,13 +237,13 @@ export default function BackgroundCanvas() {
     resize();
     animate();
 
-    window.addEventListener('resize', resize);
-    document.addEventListener('visibilitychange', handleVisibilityChange);
+    window.addEventListener("resize", resize);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
 
     return () => {
       if (animationId) cancelAnimationFrame(animationId);
-      window.removeEventListener('resize', resize);
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener("resize", resize);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
   }, []);
 
