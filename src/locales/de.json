@@ -1,0 +1,25 @@
+{
+  "hero": {
+    "title": "MINDGOLD",
+    "tagline": "INTERAKTIVES WISSENS-QUIZ-SYSTEM"
+  },
+  "screens": {
+    "game": "Spielbildschirm",
+    "editor": "Editor-Bildschirm",
+    "inProgress": "In Bearbeitung..."
+  },
+  "footer": "MindGold Engine © 2026. Alle Rechte vorbehalten.",
+  "cookie": {
+    "title": "🍪 Cookies & Analytik",
+    "text": "Wir verwenden Cookies und Google Analytics, um Ihre Nutzererfahrung und Spielperformance zu verbessern.",
+    "accept": "Akzeptieren",
+    "decline": "Ablehnen"
+  },
+  "testModal": {
+    "title": "Test-Modalfenster",
+    "description": "Überprüfung von Layout, interaktiven Elementen und UI-Styling!",
+    "openBtn": "Test-Modal öffnen",
+    "actionSuccess": "Erfolgsaktion",
+    "actionCancel": "Abbrechen"
+  }
+}

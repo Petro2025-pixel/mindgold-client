@@ -31,15 +31,6 @@ body {
 }
 
 /* Background Canvas */
-/* #circuit-bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -1;
-  pointer-events: none;
-} */
 
 #circuit-bg {
   position: fixed;
@@ -49,7 +40,7 @@ body {
   height: 100vh;
   z-index: -1;
   pointer-events: none;
-  background: var(--bg-dark); /* или linear-gradient(135deg, #120524 0%, #0a0314 100%) */
+  background: transparent; 
 }
 
 /* Layout Containers */
