@@ -1,0 +1,29 @@
+name: Deploy MindGold Client
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy Client to VPS via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            set -e
+            echo "--> Deploying Frontend..."
+            cd /var/www/mindgold-client
+            git stash
+            git pull origin main
+            npm install
+            npm run build
+            systemctl reload nginx
+            echo "--> Frontend successfully deployed!"
