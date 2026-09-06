@@ -1,7 +1,14 @@
 
 import { useEffect, useRef } from 'react';
 
-export default function BackgroundCanvas() {
+/**
+ * ParticleBackground Component.
+ * Renders an interactive canvas background with moving nodes and connections.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered canvas element for particles background.
+ */
+export const ParticleBackground = () => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -73,4 +80,5 @@ export default function BackgroundCanvas() {
   }, []);
 
   return <canvas ref={canvasRef} id="circuit-bg" />;
-}
+};
+export default ParticleBackground;

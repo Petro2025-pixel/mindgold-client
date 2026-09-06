@@ -21,5 +21,22 @@
     "openBtn": "Test-Modal öffnen",
     "actionSuccess": "Erfolgsaktion",
     "actionCancel": "Abbrechen"
+  },
+  "diagnostics": {
+    "title": "Systemdiagnose:",
+    "checking": "Überprüfung...",
+    "run": "Diagnose starten",
+    "serverConnection": "Serververbindung",
+    "registrationAuth": "Registrierung / Authentifizierung",
+    "quizList": "Quizliste"
+  },
+  "notFound": {
+    "message": "Die angeforderte Seite existiert nicht.",
+    "redirecting": "Weiterleitung zur Startseite in",
+    "sec": "Sek...",
+    "returnNow": "Jetzt zurückkehren"
+  },
+  "modal": {
+    "closeTitle": "Schließen (Esc)"
   }
 }

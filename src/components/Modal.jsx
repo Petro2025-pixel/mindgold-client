@@ -1,4 +1,6 @@
 import React, { useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import { lockScroll, unlockScroll } from "../utils/scrollLock";
 import "./Modal.css";
 
 /**
@@ -24,6 +26,8 @@ export const Modal = ({
   children,
   showCloseButton = true,
 }) => {
+  const { t } = useTranslation();
+
   useEffect(() => {
     /**
      * Handles keyboard events to close the modal on 'Escape'.
@@ -37,12 +41,14 @@ export const Modal = ({
 
     if (isOpen) {
       document.addEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = "hidden";
+      lockScroll();
     }
 
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = "unset";
+      if (isOpen) {
+        unlockScroll();
+      }
     };
   }, [isOpen, onClose]);
 
@@ -55,7 +61,7 @@ export const Modal = ({
           <button
             className="modal-close-btn"
             onClick={onClose}
-            title="Close (Esc)"
+            title={t("modal.closeTitle", "Close (Esc)")}
           >
             ✕
           </button>

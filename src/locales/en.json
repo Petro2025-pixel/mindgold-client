@@ -21,5 +21,22 @@
     "openBtn": "Open Test Modal",
     "actionSuccess": "Success Action",
     "actionCancel": "Cancel Action"
+  },
+  "diagnostics": {
+    "title": "System diagnostics:",
+    "checking": "Checking...",
+    "run": "Run diagnostics",
+    "serverConnection": "Server connection",
+    "registrationAuth": "Registration / authentication",
+    "quizList": "Quiz list"
+  },
+  "notFound": {
+    "message": "The requested page does not exist.",
+    "redirecting": "Redirecting to home in",
+    "sec": "sec...",
+    "returnNow": "Return Now"
+  },
+  "modal": {
+    "closeTitle": "Close (Esc)"
   }
 }

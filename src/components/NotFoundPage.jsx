@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 /**
  * Initial delay in seconds before automatically redirecting to the home page.
@@ -18,31 +19,33 @@ const REDIRECT_SECONDS = 8;
 export default function NotFoundPage() {
   const [secondsLeft, setSecondsLeft] = useState(REDIRECT_SECONDS);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setSecondsLeft((prev) => {
-        if (prev <= 1) {
-          clearInterval(timer);
-          navigate('/');
-          return 0;
-        }
-        return prev - 1;
-      });
+    if (secondsLeft <= 0) {
+      navigate('/');
+      return;
+    }
+
+    const timer = setTimeout(() => {
+      setSecondsLeft((prev) => prev - 1);
     }, 1000);
 
-    return () => clearInterval(timer);
-  }, [navigate]);
+    return () => clearTimeout(timer);
+  }, [secondsLeft, navigate]);
 
   return (
     <div className="not-found-page">
       <h1 className="not-found-code">404</h1>
-      <p className="not-found-message">The requested page does not exist.</p>
+      <p className="not-found-message">
+        {t('notFound.message', 'The requested page does not exist.')}
+      </p>
       <p className="not-found-timer">
-        Redirecting to home in <span>{secondsLeft}</span> sec...
+        {t('notFound.redirecting', 'Redirecting to home in')} <span>{secondsLeft}</span>{' '}
+        {t('notFound.sec', 'sec...')}
       </p>
       <button className="btn-hex" onClick={() => navigate('/')}>
-        Return Now
+        {t('notFound.returnNow', 'Return Now')}
       </button>
     </div>
   );

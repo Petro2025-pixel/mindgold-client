@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import BackgroundCanvas from "./BackgroundCanvas";
-import BackgroundCanvas2 from "./BackgroundCanvas2";
+import ParticleBackground from "./BackgroundCanvas";
+import CircuitBackground from "./BackgroundCanvas2";
 
 /**
  * BackgroundManager Component.
@@ -30,7 +30,7 @@ export default function BackgroundManager() {
   return (
     <>
       {/* Dynamic Background Canvas Renderer */}
-      {activeBg === "dots" ? <BackgroundCanvas /> : <BackgroundCanvas2 />}
+      {activeBg === "dots" ? <ParticleBackground /> : <CircuitBackground />}
 
       {/* Floating Theme Switcher Control */}
       <button

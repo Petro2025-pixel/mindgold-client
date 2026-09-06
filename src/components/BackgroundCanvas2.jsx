@@ -1,6 +1,14 @@
 import { useEffect, useRef } from "react";
 
-export default function BackgroundCanvas() {
+/**
+ * CircuitBackground Component.
+ * Renders a glowing tech circuit board style animated canvas background.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered canvas element for circuit background.
+ */
+
+export const CircuitBackground = () => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -250,4 +258,5 @@ export default function BackgroundCanvas() {
   }, []);
 
   return <canvas ref={canvasRef} id="circuit-bg" />;
-}
+};
+export default CircuitBackground;

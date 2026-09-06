@@ -12,6 +12,7 @@
  */
 
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -22,7 +23,8 @@ const API_URL = import.meta.env.VITE_API_URL;
  * @typedef {Object} SystemCheckItem
  * @property {string} key - Unique identifier, also used as the React list key
  *   and as the results-map key.
- * @property {string} label - Human-readable description shown next to the result.
+ * @property {string} translationKey - Key for i18n translation lookup.
+ * @property {string} fallbackLabel - Human-readable description shown next to the result as fallback.
  * @property {() => Promise<Response>} run - Executes the check and resolves
  *   with the raw fetch Response.
  */
@@ -31,12 +33,14 @@ const API_URL = import.meta.env.VITE_API_URL;
 const CHECKS = [
   {
     key: 'health',
-    label: 'Server connection',
+    translationKey: 'diagnostics.serverConnection',
+    fallbackLabel: 'Server connection',
     run: () => fetch(`${API_URL}/health`),
   },
   {
     key: 'auth',
-    label: 'Registration / authentication',
+    translationKey: 'diagnostics.registrationAuth',
+    fallbackLabel: 'Registration / authentication',
     run: () =>
       fetch(`${API_URL}/users/register`, {
         method: 'POST',
@@ -46,7 +50,8 @@ const CHECKS = [
   },
   {
     key: 'quizzes',
-    label: 'Quiz list',
+    translationKey: 'diagnostics.quizList',
+    fallbackLabel: 'Quiz list',
     run: () => fetch(`${API_URL}/quizzes`),
   },
 ];
@@ -65,6 +70,8 @@ const CHECKS = [
  * <SystemCheck />
  */
 export default function SystemCheck() {
+  const { t } = useTranslation();
+
   /**
    * Maps each check's `key` to its current status string.
    * @type {[Record<string, string>, Function]}
@@ -98,14 +105,17 @@ export default function SystemCheck() {
 
   return (
     <div className="system-check">
-      <h3>System diagnostics:</h3>
+      <h3>{t('diagnostics.title', 'System diagnostics:')}</h3>
       <button className="btn-hex" onClick={runAll} disabled={running}>
-        {running ? 'Checking...' : 'Run diagnostics'}
+        {running
+          ? t('diagnostics.checking', 'Checking...')
+          : t('diagnostics.run', 'Run diagnostics')}
       </button>
       <ul>
         {CHECKS.map((c) => (
           <li key={c.key} className={`check-${results[c.key] ?? 'idle'}`}>
-            {c.label}: {results[c.key] === 'ok' ? '✅' : results[c.key] ? '❌' : '—'}
+            {t(c.translationKey, c.fallbackLabel)}: {' '}
+            {results[c.key] === 'ok' ? '✅' : results[c.key] ? '❌' : '—'}
           </li>
         ))}
       </ul>
