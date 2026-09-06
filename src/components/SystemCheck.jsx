@@ -98,7 +98,7 @@ export default function SystemCheck() {
 
   return (
     <div className="system-check">
-      <h3>System diagnostics</h3>
+      <h3>System diagnostics:</h3>
       <button className="btn-hex" onClick={runAll} disabled={running}>
         {running ? 'Checking...' : 'Run diagnostics'}
       </button>
