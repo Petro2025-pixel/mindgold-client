@@ -1,14 +1,13 @@
 {
   "hero": {
     "title": "MINDGOLD",
-    "tagline": "INTERACTIVE KNOWLEDGE QUIZ ENGINE"
+    "tagline": "INTERACTIVE QUIZ AND KNOWLEDGE ENGINE"
   },
   "screens": {
     "game": "Game Screen",
     "editor": "Editor Screen",
     "inProgress": "In Progress..."
   },
-  "footer": "MindGold Engine © 2026. All rights reserved.",
   "cookie": {
     "title": "🍪 Cookie & Analytics",
     "text": "We use cookies and Google Analytics to improve your user experience and game performance.",
@@ -38,5 +37,39 @@
   },
   "modal": {
     "closeTitle": "Close (Esc)"
+  },
+  "menu": {
+    "title": "MindGold",
+    "subtitle": "Interactive Quiz and Knowledge Engine",
+    "game": {
+      "badge": "Core Mode",
+      "title": "Game Arena",
+      "desc": "Take an intellectual quiz with a timer and safe levels.",
+      "action": "Enter Arena"
+    },
+    "editor": {
+      "badge": "Constructor",
+      "title": "Quiz Lab",
+      "desc": "Create, edit, and validate your quizzes using AJV schema.",
+      "action": "Open Lab"
+    },
+    "leaderboard": {
+      "badge": "Ranking",
+      "title": "Hall of Fame",
+      "desc": "Top players leaderboard and history of your personal records.",
+      "action": "View Top"
+    },
+    "cheatsheet": {
+      "badge": "Knowledge",
+      "title": "CheatSheet",
+      "desc": "Quick access to reference materials and hints on completed topics.",
+      "action": "Inspect Data"
+    }
+  },
+  "footer": {
+    "copyright": "MindGold Engine © 2026. All rights reserved.",
+    "switchToCircuit": "Switch to Circuit",
+    "switchToDots": "Switch to Dots",
+    "diagnostics": "System Diagnostics"
   }
 }

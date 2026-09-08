@@ -1,0 +1,89 @@
+/* Container & Navigation */
+.diagnostics-page-container {
+  min-height: calc(100vh - 60px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  color: #ffffff;
+  box-sizing: border-box;
+}
+
+.diagnostics-content {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* 2. Open Test Modal Button with Hover & Scaling */
+.test-modal-trigger-wrapper {
+  margin-top: 10px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.btn-open-test-modal {
+  padding: 10px 26px;
+  cursor: pointer;
+  border-radius: 20px;
+  border: 1px solid #f1c40f;
+  background: #2c0b3e;
+  color: #f1c40f;
+  font-weight: bold;
+  font-size: 0.95rem;
+  transition: all 0.25s ease-in-out;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.btn-open-test-modal:hover {
+  background: #3e1256;
+  border-color: #ffd700;
+  color: #ffd700;
+  transform: scale(1.03) translateY(-1px);
+  box-shadow: 0 6px 18px rgba(241, 196, 15, 0.25);
+}
+
+.btn-open-test-modal:active {
+  transform: scale(0.98);
+}
+
+/* 3. Fixing Vertical Alignment for SystemCheck Component */
+.system-check-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.system-check {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.system-check h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.system-check .btn-hex {
+  margin: 1rem 0;
+}
+
+.system-check ul {
+  list-style: disc;
+  padding-left: 1.2rem;
+  margin-top: 0.75rem;
+  text-align: left;
+  display: inline-block;
+}
+
+.system-check li {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  color: #ffffff;
+}

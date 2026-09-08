@@ -1,14 +1,13 @@
 {
   "hero": {
     "title": "MINDGOLD",
-    "tagline": "INTERAKTIVES WISSENS-QUIZ-SYSTEM"
+    "tagline": "INTERAKTIVE QUIZ- UND WISSENSENGINE"
   },
   "screens": {
     "game": "Spielbildschirm",
     "editor": "Editor-Bildschirm",
     "inProgress": "In Bearbeitung..."
   },
-  "footer": "MindGold Engine © 2026. Alle Rechte vorbehalten.",
   "cookie": {
     "title": "🍪 Cookies & Analytik",
     "text": "Wir verwenden Cookies und Google Analytics, um Ihre Nutzererfahrung und Spielperformance zu verbessern.",
@@ -38,5 +37,39 @@
   },
   "modal": {
     "closeTitle": "Schließen (Esc)"
+  },
+  "menu": {
+    "title": "MindGold",
+    "subtitle": "Interaktive Quiz- und Wissensengine",
+    "game": {
+      "badge": "Hauptmodus",
+      "title": "Game Arena",
+      "desc": "Nehmen Sie an einem intellektuellen Quiz mit Timer und Sicherheitsstufen teil.",
+      "action": "Arena betreten"
+    },
+    "editor": {
+      "badge": "Konstruktor",
+      "title": "Quiz Lab",
+      "desc": "Erstellen, bearbeiten und validieren Sie Ihre Quizzes mit dem AJV-Schema.",
+      "action": "Lab öffnen"
+    },
+    "leaderboard": {
+      "badge": "Rangliste",
+      "title": "Ruhmeshalle",
+      "desc": "Bestenliste der Top-Spieler und Verlaufe Ihrer persönlichen Rekorde.",
+      "action": "Top anzeigen"
+    },
+    "cheatsheet": {
+      "badge": "Wissen",
+      "title": "Spickzettel",
+      "desc": "Schneller Zugriff auf Referenzmaterialien und Hinweise zu absolvierten Themen.",
+      "action": "Daten prüfen"
+    }
+  },
+  "footer": {
+    "copyright": "MindGold Engine © 2026. Alle Rechte vorbehalten.",
+    "switchToCircuit": "Zu Schaltkreis wechseln",
+    "switchToDots": "Zu Punkten wechseln",
+    "diagnostics": "Systemdiagnose"
   }
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { Modal } from "./Modal";
-import { initGA } from "../utils/analytics";
+import { Modal } from "../Modal/Modal";
+import { initGA } from "../../utils/analytics";
 
 /**
  * Google Analytics 4 Measurement ID for the MindGold application.

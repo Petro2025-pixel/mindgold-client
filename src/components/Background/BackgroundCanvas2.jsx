@@ -216,8 +216,7 @@ export const CircuitBackground = () => {
     }
 
     function draw() {
-      ctx.fillStyle = "rgba(18, 5, 36, 0.12)";
-      ctx.fillRect(0, 0, width, height);
+      ctx.clearRect(0, 0, width, height);
 
       for (let t of liveTraces) {
         drawPartial(t);

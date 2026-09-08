@@ -1,0 +1,111 @@
+.app-header {
+  width: 100%;
+  height: 60px; /* Fixed height for precise layout calculations */
+  display: flex;
+  justify-content: center;
+  padding: 0.75rem 0;
+  
+  /* Background styling & glassmorphism blur overlay */
+  background: rgba(15, 15, 25, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(241, 196, 15, 0.15);
+  
+  /* Sticky positioning to keep header visible on scroll */
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-container {
+  width: 100%;
+  max-width: 1140px; /* Aligns with main content grid width */
+  padding: 0 1.5rem;
+  display: flex;
+  justify-content: space-between; /* Spreads items to far left & right */
+  align-items: center;
+  box-sizing: border-box;
+}
+
+/* Left section wrapper: Return button and language controls */
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Spacing between return button and language switcher group */
+}
+
+/* Language switcher button group wrapper */
+.lang-switcher-group {
+  display: flex;
+  align-items: center;
+  gap: 6px; /* Spacing between individual language buttons (EN, DE, UK) */
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Navigation return button styling */
+.btn-return-now {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 6px;
+  border: 1px solid rgba(241, 196, 15, 0.4);
+  background: rgba(18, 5, 36, 0.6);
+  color: #f1c40f;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-return-now:hover {
+  background: rgba(241, 196, 15, 0.15);
+  border-color: #f1c40f;
+  box-shadow: 0 0 10px rgba(241, 196, 15, 0.3);
+  transform: translateX(-2px);
+}
+
+/* Language selection button styling */
+.lang-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #a0a0c0;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.lang-btn.active, .lang-btn:hover {
+  border-color: #f1c40f;
+  color: #f1c40f;
+  background: rgba(241, 196, 15, 0.1);
+}
+
+/* Live API status indicator pill */
+.live-status {
+  font-size: 0.8rem;
+  color: #8a8aa3;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 4px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #2ecc71;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #2ecc71;
+}
