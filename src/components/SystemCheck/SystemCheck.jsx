@@ -1,7 +1,5 @@
-// components/SystemCheck.jsx
 
-/**
- * @file SystemCheck.jsx
+/** * @file SystemCheck.jsx
  * @module components/SystemCheck
  * @description
  * Diagnostic panel for the MindGold client. Runs a sequence of live checks
@@ -91,6 +89,7 @@ export default function SystemCheck() {
    */
   const runAll = async () => {
     setRunning(true);
+    if (window.triggerHeaderCheck) window.triggerHeaderCheck();
     for (const check of CHECKS) {
       setResults((r) => ({ ...r, [check.key]: 'pending' }));
       try {

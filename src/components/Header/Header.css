@@ -70,6 +70,39 @@
   transform: translateX(-2px);
 }
 
+.return-arrow {
+  display: inline-block;
+  transform: scaleX(-1);
+  transition: transform 0.3s ease;
+}
+
+.btn-return-now:hover .return-arrow {
+  transform: scaleX(-1) translateX(4px); 
+}
+
+@media (max-width: 768px) {
+  .btn-return-now .btn-text {
+    display: none;
+  }
+
+  .btn-return-now {
+    padding: 6px 10px;
+  }
+
+  .return-arrow {
+    animation: move-left 1.2s infinite alternate ease-in-out;
+  }
+}
+
+@keyframes move-left {
+  0% {
+    transform: scaleX(-1) translateX(0);
+  }
+  100% {
+    transform: scaleX(-1) translateX(4px);
+  }
+}
+
 /* Language selection button styling */
 .lang-btn {
   background: transparent;
@@ -106,7 +139,7 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  transition: background-color 0.8s ease, box-shadow 0.8s ease;
 }
 
 /* Operational API status (Green) */
@@ -124,7 +157,7 @@
 /* Checking API status with pulse animation (Yellow) */
 .live-status.status-checking .status-dot {
   background-color: #f1c40f;
-  animation: pulse-blink 1s infinite alternate;
+  animation: pulse-blink 2s infinite alternate;
 }
 
 /* Smooth blinking keyframe animation for active ping state */

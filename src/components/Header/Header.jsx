@@ -40,6 +40,7 @@ export const Header = () => {
       setApiStatus("error");
     }
   };
+  window.triggerHeaderCheck = checkHealth;
 
   useEffect(() => {
     checkHealth();
@@ -54,7 +55,10 @@ export const Header = () => {
         <div className="header-left">
           {showReturnButton && (
             <button className="btn-return-now" onClick={() => navigate("/")}>
-              ← {t("notFound.returnNow", "Return Now")}
+              <span className="card-arrow return-arrow">➔</span>
+              <span className="btn-text">
+                {t("notFound.returnNow", "Return Now")}
+              </span>
             </button>
           )}
 
@@ -86,7 +90,8 @@ export const Header = () => {
           <div className={`live-status status-${apiStatus}`}>
             <span className="status-dot"></span>
             <span>
-              {apiStatus === "checking" && t("header.statusChecking", "API CHECKING...")}
+              {apiStatus === "checking" &&
+                t("header.statusChecking", "API CHECKING...")}
               {apiStatus === "ok" && t("header.statusOk", "API OK")}
               {apiStatus === "error" && t("header.statusError", "API OFFLINE")}
             </span>
