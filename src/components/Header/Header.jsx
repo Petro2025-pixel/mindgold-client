@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./Header.css";
 
+// Retrieve API URL from environment variables, fallback to relative path if undefined
+const API_URL = import.meta.env.VITE_API_URL || "";
+
 /**
  * Header Component
- * Sticky top navigation bar containing return button, language switcher, and API status indicator.
+ * Sticky top navigation bar containing return button, language switcher, and live API status indicator.
  *
  * @component
  * @returns {React.ReactElement} The rendered Header navigation bar.
@@ -15,8 +18,34 @@ export const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  // API status state: 'ok' | 'error' | 'checking'
+  const [apiStatus, setApiStatus] = useState("checking");
+
   // Check if current route is NOT the home page
   const showReturnButton = location.pathname !== "/";
+
+  /**
+   * Fetches backend health check endpoint to update status indicator.
+   */
+  const checkHealth = async () => {
+    setApiStatus("checking");
+    try {
+      const res = await fetch(`${API_URL}/health`);
+      if (res.ok) {
+        setApiStatus("ok");
+      } else {
+        setApiStatus("error");
+      }
+    } catch (error) {
+      setApiStatus("error");
+    }
+  };
+
+  useEffect(() => {
+    checkHealth();
+    const interval = setInterval(checkHealth, 30000); // Periodic ping every 30 seconds
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <header className="app-header">
@@ -54,9 +83,13 @@ export const Header = () => {
 
         {/* Right section: System operational status indicator */}
         <div className="header-right">
-          <div className="live-status">
+          <div className={`live-status status-${apiStatus}`}>
             <span className="status-dot"></span>
-            <span>API OK</span>
+            <span>
+              {apiStatus === "checking" && t("header.statusChecking", "API CHECKING...")}
+              {apiStatus === "ok" && t("header.statusOk", "API OK")}
+              {apiStatus === "error" && t("header.statusError", "API OFFLINE")}
+            </span>
           </div>
         </div>
       </div>

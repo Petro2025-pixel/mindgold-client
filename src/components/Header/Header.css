@@ -105,7 +105,36 @@
 .status-dot {
   width: 8px;
   height: 8px;
-  background-color: #2ecc71;
   border-radius: 50%;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Operational API status (Green) */
+.live-status.status-ok .status-dot {
+  background-color: #2ecc71;
   box-shadow: 0 0 8px #2ecc71;
+}
+
+/* Unreachable/Failed API status (Red) */
+.live-status.status-error .status-dot {
+  background-color: #e74c3c;
+  box-shadow: 0 0 8px #e74c3c;
+}
+
+/* Checking API status with pulse animation (Yellow) */
+.live-status.status-checking .status-dot {
+  background-color: #f1c40f;
+  animation: pulse-blink 1s infinite alternate;
+}
+
+/* Smooth blinking keyframe animation for active ping state */
+@keyframes pulse-blink {
+  0% {
+    opacity: 0.3;
+    box-shadow: 0 0 2px #f1c40f;
+  }
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 10px #f1c40f;
+  }
 }

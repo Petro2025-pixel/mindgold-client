@@ -71,5 +71,10 @@
     "switchToCircuit": "Переключити на Схему",
     "switchToDots": "Переключити на Крапки",
     "diagnostics": "Діагностика системи"
-  }
+  },
+  "header": {
+  "statusChecking": "ПЕРЕВІРКА API...",
+  "statusOk": "API OK",
+  "statusError": "API ОФЛАЙН"
+}
 }

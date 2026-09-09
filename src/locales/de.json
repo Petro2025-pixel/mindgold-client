@@ -71,5 +71,10 @@
     "switchToCircuit": "Zu Schaltkreis wechseln",
     "switchToDots": "Zu Punkten wechseln",
     "diagnostics": "Systemdiagnose"
-  }
+  },
+  "header": {
+  "statusChecking": "PRÜFE API...",
+  "statusOk": "API OK",
+  "statusError": "API OFFLINE"
+}
 }

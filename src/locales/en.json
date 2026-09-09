@@ -71,5 +71,10 @@
     "switchToCircuit": "Switch to Circuit",
     "switchToDots": "Switch to Dots",
     "diagnostics": "System Diagnostics"
-  }
+  },
+  "header": {
+  "statusChecking": "API CHECKING...",
+  "statusOk": "API OK",
+  "statusError": "API OFFLINE"
+}
 }
