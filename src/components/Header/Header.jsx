@@ -27,24 +27,33 @@ export const Header = () => {
   /**
    * Fetches backend health check endpoint to update status indicator.
    */
+  const MIN_CHECKING_DURATION = 1000;
+
   const checkHealth = async () => {
     setApiStatus("checking");
+    const startedAt = Date.now();
+    let result = "error";
+
     try {
       const res = await fetch(`${API_URL}/health`);
-      if (res.ok) {
-        setApiStatus("ok");
-      } else {
-        setApiStatus("error");
-      }
-    } catch (error) {
-      setApiStatus("error");
+      result = res.ok ? "ok" : "error";
+    } catch {
+      result = "error";
     }
+
+    const elapsed = Date.now() - startedAt;
+    const remaining = MIN_CHECKING_DURATION - elapsed;
+    if (remaining > 0) {
+      await new Promise((resolve) => setTimeout(resolve, remaining));
+    }
+
+    setApiStatus(result);
   };
-  window.triggerHeaderCheck = checkHealth;
 
   useEffect(() => {
+    window.triggerHeaderCheck = checkHealth;
     checkHealth();
-    const interval = setInterval(checkHealth, 30000); // Periodic ping every 30 seconds
+    const interval = setInterval(checkHealth, 30000);
     return () => clearInterval(interval);
   }, []);
 
@@ -54,7 +63,11 @@ export const Header = () => {
         {/* Left section: Navigation back button & Language switcher group */}
         <div className="header-left">
           {showReturnButton && (
-            <button className="btn-return-now" onClick={() => navigate("/")}>
+            <button
+              className="btn-return-now"
+              onClick={() => navigate("/")}
+              title={t("notFound.returnNow", "Return Now")}
+            >
               <span className="card-arrow return-arrow">➔</span>
               <span className="btn-text">
                 {t("notFound.returnNow", "Return Now")}
@@ -87,14 +100,24 @@ export const Header = () => {
 
         {/* Right section: System operational status indicator */}
         <div className="header-right">
-          <div className={`live-status status-${apiStatus}`}>
-            <span className="status-dot"></span>
-            <span>
+          <div
+            className={`live-status status-${apiStatus}`}
+            title={
+              apiStatus === "checking"
+                ? t("header.statusChecking", "API CHECKING...")
+                : apiStatus === "ok"
+                  ? t("header.statusOk", "API OK")
+                  : t("header.statusError", "API OFFLINE")
+            }
+          >
+            <span className="status-label">API</span>
+            <span className="status-text">
               {apiStatus === "checking" &&
-                t("header.statusChecking", "API CHECKING...")}
-              {apiStatus === "ok" && t("header.statusOk", "API OK")}
-              {apiStatus === "error" && t("header.statusError", "API OFFLINE")}
+                t("header.statusCheckingShort", "CHECKING...")}
+              {apiStatus === "ok" && t("header.statusOkShort", "OK")}
+              {apiStatus === "error" && t("header.statusErrorShort", "OFFLINE")}
             </span>
+            <span className="status-dot"></span>
           </div>
         </div>
       </div>

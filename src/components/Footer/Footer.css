@@ -30,43 +30,36 @@
   gap: 12px;
 }
 
-/* Diagnostics Button */
-.btn-diagnostics {
-  background: transparent;
-  border: 1px solid rgba(241, 196, 15, 0.3);
-  color: #f1c40f;
-  padding: 6px 14px;
-  border-radius: 4px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.btn-diagnostics:hover {
-  background: rgba(241, 196, 15, 0.15);
-  border-color: #f1c40f;
-  box-shadow: 0 0 10px rgba(241, 196, 15, 0.2);
-}
-
-
-.btn-circuit-switch {
-  position: static; 
+.btn-footer-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   background: rgba(18, 5, 36, 0.8);
   border: 1px solid rgba(241, 196, 15, 0.3);
-  color: #ffd700;
+  color: #f1c40f;
   padding: 6px 14px;
   border-radius: 6px;
   font-size: 0.8rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
 }
 
-.btn-circuit-switch:hover {
+.btn-footer-action:hover {
   background: rgba(241, 196, 15, 0.15);
+  border-color: #f1c40f;
   box-shadow: 0 0 10px rgba(241, 196, 15, 0.2);
+}
+
+.footer-btn-icon {
+  flex-shrink: 0;
+}
+@media (max-width: 768px) {
+  .btn-footer-action .footer-btn-text {
+    display: none;
+  }
+
+  .btn-footer-action {
+    padding: 6px 10px;
+  }
 }

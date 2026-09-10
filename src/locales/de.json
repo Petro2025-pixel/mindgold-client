@@ -72,9 +72,12 @@
     "switchToDots": "Zu Punkten wechseln",
     "diagnostics": "Systemdiagnose"
   },
-  "header": {
-  "statusChecking": "PRÜFE API...",
-  "statusOk": "API OK",
-  "statusError": "API OFFLINE"
-}
+   "header": {
+    "statusChecking": "API PRÜFUNG...",
+    "statusOk": "API OK",
+    "statusError": "API OFFLINE",
+    "statusCheckingShort": "PRÜFUNG...",
+    "statusOkShort": "OK",
+    "statusErrorShort": "OFFLINE"
+  }
 }

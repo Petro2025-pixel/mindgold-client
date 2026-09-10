@@ -73,8 +73,11 @@
     "diagnostics": "Діагностика системи"
   },
   "header": {
-  "statusChecking": "ПЕРЕВІРКА API...",
-  "statusOk": "API OK",
-  "statusError": "API ОФЛАЙН"
-}
+    "statusChecking": "API ПЕРЕВІРКА...",
+    "statusOk": "API OK",
+    "statusError": "API ОФЛАЙН",
+    "statusCheckingShort": "ПЕРЕВІРКА...",
+    "statusOkShort": "OK",
+    "statusErrorShort": "ОФЛАЙН"
+  }
 }

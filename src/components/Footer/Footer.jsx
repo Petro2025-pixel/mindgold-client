@@ -17,10 +17,10 @@ export const Footer = () => {
 
   const handleToggleBg = () => {
     const nextTheme = activeTheme === "dots" ? "circuit" : "dots";
-    setActiveTheme(nextTheme); 
-    
+    setActiveTheme(nextTheme);
+
     window.dispatchEvent(
-      new CustomEvent("toggle-bg-theme", { detail: { theme: nextTheme } })
+      new CustomEvent("toggle-bg-theme", { detail: { theme: nextTheme } }),
     );
   };
 
@@ -31,24 +31,40 @@ export const Footer = () => {
           <span>
             {t(
               "footer.copyright",
-              "MindGold Engine © 2026. All rights reserved."
+              "MindGold Engine © 2026. All rights reserved.",
             )}
           </span>
         </div>
 
         <div className="footer-right">
-          <button className="btn-circuit-switch" onClick={handleToggleBg}>
-            {activeTheme === "dots" ? "🕸️ " : "🔮 "}
-            {activeTheme === "dots"
-              ? t("footer.switchToCircuit", "Switch to Circuit")
-              : t("footer.switchToDots", "Switch to Dots")}
+          <button
+            className="btn-footer-action"
+            onClick={handleToggleBg}
+            title={
+              activeTheme === "dots"
+                ? t("footer.switchToCircuit", "Switch to Circuit")
+                : t("footer.switchToDots", "Switch to Dots")
+            }
+          >
+            <span className="footer-btn-icon">
+              {activeTheme === "dots" ? "🕸️" : "🔮"}
+            </span>
+            <span className="footer-btn-text">
+              {activeTheme === "dots"
+                ? t("footer.switchToCircuit", "Switch to Circuit")
+                : t("footer.switchToDots", "Switch to Dots")}
+            </span>
           </button>
 
           <button
-            className="btn-diagnostics"
+            className="btn-footer-action"
             onClick={() => navigate("/diagnostics")}
+            title={t("footer.diagnostics", "System Diagnostics")}
           >
-            ⚡ {t("footer.diagnostics", "System Diagnostics")}
+            <span className="footer-btn-icon">⚡</span>
+            <span className="footer-btn-text">
+              {t("footer.diagnostics", "System Diagnostics")}
+            </span>
           </button>
         </div>
       </div>
