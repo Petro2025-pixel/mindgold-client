@@ -28,11 +28,10 @@ export const Footer = () => {
     <footer className="app-footer">
       <div className="footer-container">
         <div className="footer-left">
-          <span>
-            {t(
-              "footer.copyright",
-              "MindGold Engine © 2026. All rights reserved.",
-            )}
+          <span className="footer-copyright">
+            {t("footer.copyrightLine1", "MindGold Engine © 2026.")}{" "}
+            <br className="mobile-break" />
+            {t("footer.copyrightLine2", "All rights reserved.")}
           </span>
         </div>
 

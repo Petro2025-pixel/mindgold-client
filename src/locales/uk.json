@@ -67,7 +67,8 @@
     }
   },
   "footer": {
-    "copyright": "MindGold Engine © 2026. Усі права захищені.",
+    "copyrightLine1": "MindGold Engine © 2026.",
+    "copyrightLine2": "Усі права захищені.",
     "switchToCircuit": "Переключити на Схему",
     "switchToDots": "Переключити на Крапки",
     "diagnostics": "Діагностика системи"

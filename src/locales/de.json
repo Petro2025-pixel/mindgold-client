@@ -67,12 +67,13 @@
     }
   },
   "footer": {
-    "copyright": "MindGold Engine © 2026. Alle Rechte vorbehalten.",
+    "copyrightLine1": "MindGold Engine © 2026.",
+    "copyrightLine2": "Alle Rechte vorbehalten.",
     "switchToCircuit": "Zu Schaltkreis wechseln",
     "switchToDots": "Zu Punkten wechseln",
     "diagnostics": "Systemdiagnose"
   },
-   "header": {
+  "header": {
     "statusChecking": "API PRÜFUNG...",
     "statusOk": "API OK",
     "statusError": "API OFFLINE",
