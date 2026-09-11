@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import "./Footer.css";
 
@@ -12,8 +12,11 @@ import "./Footer.css";
  */
 export const Footer = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { t } = useTranslation();
   const [activeTheme, setActiveTheme] = useState("dots");
+  const isInGame =
+    location.pathname.startsWith("/game/") && location.pathname !== "/game";
 
   const handleToggleBg = () => {
     const nextTheme = activeTheme === "dots" ? "circuit" : "dots";
@@ -55,16 +58,18 @@ export const Footer = () => {
             </span>
           </button>
 
-          <button
-            className="btn-footer-action"
-            onClick={() => navigate("/diagnostics")}
-            title={t("footer.diagnostics", "System Diagnostics")}
-          >
-            <span className="footer-btn-icon">⚡</span>
-            <span className="footer-btn-text">
-              {t("footer.diagnostics", "System Diagnostics")}
-            </span>
-          </button>
+          {!isInGame && (
+            <button
+              className="btn-footer-action"
+              onClick={() => navigate("/diagnostics")}
+              title={t("footer.diagnostics", "System Diagnostics")}
+            >
+              <span className="footer-btn-icon">⚡</span>
+              <span className="footer-btn-text">
+                {t("footer.diagnostics", "System Diagnostics")}
+              </span>
+            </button>
+          )}
         </div>
       </div>
     </footer>
