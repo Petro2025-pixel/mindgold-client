@@ -27,3 +27,4 @@ dist-ssr
 *.sln
 *.sw?
 src/App2.jsx
+src/components/Game/GameScreen2.jsx

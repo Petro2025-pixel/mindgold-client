@@ -10,6 +10,8 @@ import { SystemDiagnostics } from "./components/SystemDiagnostics/SystemDiagnost
 import NotFoundPage from "./components/NotFoundPage/NotFoundPage";
 import { Modal } from "./components/Modal/Modal";
 import { CookieConsent } from "./components/CookieConsent/CookieConsent";
+import GameScreen from "./components/Game/GameScreen";
+import QuizList from "./components/Game/QuizList";
 import "./index.css";
 
 /**
@@ -19,17 +21,17 @@ import "./index.css";
  * @component
  * @returns {React.ReactElement} The rendered game screen placeholder.
  */
-const GameScreen = () => {
-  const { t } = useTranslation();
-  return (
-    <div style={{ textAlign: "center", marginTop: "5rem", color: "#ffffff" }}>
-      <h2>{t("screens.game", "Game Screen")}</h2>
-      <p style={{ color: "var(--text-muted, #a0a0b0)" }}>
-        {t("screens.inProgress", "Development in progress...")}
-      </p>
-    </div>
-  );
-};
+// const GameScreen = () => {
+//   const { t } = useTranslation();
+//   return (
+//     <div style={{ textAlign: "center", marginTop: "5rem", color: "#ffffff" }}>
+//       <h2>{t("screens.game", "Game Screen")}</h2>
+//       <p style={{ color: "var(--text-muted, #a0a0b0)" }}>
+//         {t("screens.inProgress", "Development in progress...")}
+//       </p>
+//     </div>
+//   );
+// };
 
 /**
  * EditorScreen Component.
@@ -38,17 +40,17 @@ const GameScreen = () => {
  * @component
  * @returns {React.ReactElement} The rendered editor screen placeholder.
  */
-const EditorScreen = () => {
-  const { t } = useTranslation();
-  return (
-    <div style={{ textAlign: "center", marginTop: "5rem", color: "#ffffff" }}>
-      <h2>{t("screens.editor", "Quiz Editor")}</h2>
-      <p style={{ color: "var(--text-muted, #a0a0b0)" }}>
-        {t("screens.inProgress", "Development in progress...")}
-      </p>
-    </div>
-  );
-};
+// const EditorScreen = () => {
+//   const { t } = useTranslation();
+//   return (
+//     <div style={{ textAlign: "center", marginTop: "5rem", color: "#ffffff" }}>
+//       <h2>{t("screens.editor", "Quiz Editor")}</h2>
+//       <p style={{ color: "var(--text-muted, #a0a0b0)" }}>
+//         {t("screens.inProgress", "Development in progress...")}
+//       </p>
+//     </div>
+//   );
+// };
 
 /**
  * App Component.
@@ -75,8 +77,14 @@ export default function App() {
             element={<MainMenu onNavigate={(route) => navigate(route)} />}
           />
           <Route path="/diagnostics" element={<SystemDiagnostics />} />
-          <Route path="/game" element={<GameScreen />} />
-          <Route path="/editor" element={<EditorScreen />} />
+          {/* <Route path="/game" element={<GameScreen />} />
+          <Route path="/game/:slug" element={<GameScreen />} /> */}
+          {/* <Route path="/editor" element={<EditorScreen />} /> */}
+          {/* Клик по Game Arena ведет на /game, отображаем список квизов */}
+          <Route path="/game" element={<QuizList />} />
+
+          {/* Переход на конкретный квиз по slug */}
+          <Route path="/game/:slug" element={<GameScreen />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
