@@ -1,4 +1,3 @@
-
 /** * @file SystemCheck.jsx
  * @module components/SystemCheck
  * @description
@@ -9,8 +8,8 @@
  * developer-facing diagnostics view (e.g. mounted behind a hidden /status route).
  */
 
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -28,28 +27,18 @@ const API_URL = import.meta.env.VITE_API_URL;
  */
 
 /** @type {SystemCheckItem[]} */
+
 const CHECKS = [
   {
-    key: 'health',
-    translationKey: 'diagnostics.serverConnection',
-    fallbackLabel: 'Server connection',
+    key: "health",
+    translationKey: "diagnostics.serverConnection",
+    fallbackLabel: "Server connection",
     run: () => fetch(`${API_URL}/health`),
   },
   {
-    key: 'auth',
-    translationKey: 'diagnostics.registrationAuth',
-    fallbackLabel: 'Registration / authentication',
-    run: () =>
-      fetch(`${API_URL}/users/register`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: `diag_${Date.now()}`, password: 'diagnostics1234' }),
-      }),
-  },
-  {
-    key: 'quizzes',
-    translationKey: 'diagnostics.quizList',
-    fallbackLabel: 'Quiz list',
+    key: "quizzes",
+    translationKey: "diagnostics.quizList",
+    fallbackLabel: "Quiz list",
     run: () => fetch(`${API_URL}/quizzes`),
   },
 ];
@@ -91,12 +80,15 @@ export default function SystemCheck() {
     setRunning(true);
     if (window.triggerHeaderCheck) window.triggerHeaderCheck();
     for (const check of CHECKS) {
-      setResults((r) => ({ ...r, [check.key]: 'pending' }));
+      setResults((r) => ({ ...r, [check.key]: "pending" }));
       try {
         const res = await check.run();
-        setResults((r) => ({ ...r, [check.key]: res.ok ? 'ok' : `error-${res.status}` }));
+        setResults((r) => ({
+          ...r,
+          [check.key]: res.ok ? "ok" : `error-${res.status}`,
+        }));
       } catch {
-        setResults((r) => ({ ...r, [check.key]: 'error-network' }));
+        setResults((r) => ({ ...r, [check.key]: "error-network" }));
       }
     }
     setRunning(false);
@@ -104,17 +96,17 @@ export default function SystemCheck() {
 
   return (
     <div className="system-check">
-      <h3>{t('diagnostics.title', 'System diagnostics:')}</h3>
+      <h3>{t("diagnostics.title", "System diagnostics:")}</h3>
       <button className="btn-hex" onClick={runAll} disabled={running}>
         {running
-          ? t('diagnostics.checking', 'Checking...')
-          : t('diagnostics.run', 'Run diagnostics')}
+          ? t("diagnostics.checking", "Checking...")
+          : t("diagnostics.run", "Run diagnostics")}
       </button>
       <ul>
         {CHECKS.map((c) => (
-          <li key={c.key} className={`check-${results[c.key] ?? 'idle'}`}>
-            {t(c.translationKey, c.fallbackLabel)}: {' '}
-            {results[c.key] === 'ok' ? '✅' : results[c.key] ? '❌' : '—'}
+          <li key={c.key} className={`check-${results[c.key] ?? "idle"}`}>
+            {t(c.translationKey, c.fallbackLabel)}:{" "}
+            {results[c.key] === "ok" ? "✅" : results[c.key] ? "❌" : "—"}
           </li>
         ))}
       </ul>
