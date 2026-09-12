@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import "./Footer.css";
@@ -39,6 +39,19 @@ export const Footer = () => {
         </div>
 
         <div className="footer-right">
+          {!isInGame && (
+            <button
+              className="btn-footer-action"
+              onClick={() => navigate("/diagnostics")}
+              title={t("footer.diagnostics", "System Diagnostics")}
+            >
+              <span className="footer-btn-icon">⚡</span>
+              <span className="footer-btn-text">
+                {t("footer.diagnostics", "System Diagnostics")}
+              </span>
+            </button>
+          )}
+
           <button
             className="btn-footer-action"
             onClick={handleToggleBg}
@@ -57,19 +70,6 @@ export const Footer = () => {
                 : t("footer.switchToDots", "Switch to Dots")}
             </span>
           </button>
-
-          {!isInGame && (
-            <button
-              className="btn-footer-action"
-              onClick={() => navigate("/diagnostics")}
-              title={t("footer.diagnostics", "System Diagnostics")}
-            >
-              <span className="footer-btn-icon">⚡</span>
-              <span className="footer-btn-text">
-                {t("footer.diagnostics", "System Diagnostics")}
-              </span>
-            </button>
-          )}
         </div>
       </div>
     </footer>

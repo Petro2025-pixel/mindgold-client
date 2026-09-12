@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import confetti from "canvas-confetti";
+import "./GameScreen.css";
 
 const API_URL = "https://mindgold.top/api/v1";
 const QUESTION_TIMEOUT = 30;
@@ -16,6 +17,7 @@ function shuffleArray(array) {
 
 export default function GameScreen() {
   const { slug } = useParams();
+  const navigate = useNavigate();
   const [quiz, setQuiz] = useState(null);
   const [questions, setQuestions] = useState([]);
   const [current, setCurrent] = useState(0);
@@ -101,29 +103,11 @@ export default function GameScreen() {
 
   // Big confetti for game finish
   const triggerBigConfetti = () => {
-    const end = Date.now() + 2 * 1000;
-    const colors = ["#00d2ff", "#ff9f43", "#f1c40f"];
-
-    (function frame() {
-      confetti({
-        particleCount: 4,
-        angle: 60,
-        spread: 55,
-        origin: { x: 0 },
-        colors: colors,
-      });
-      confetti({
-        particleCount: 4,
-        angle: 120,
-        spread: 55,
-        origin: { x: 1 },
-        colors: colors,
-      });
-
-      if (Date.now() < end) {
-        requestAnimationFrame(frame);
-      }
-    })();
+    confetti({
+      particleCount: 100,
+      spread: 60,
+      origin: { y: 0.7 },
+    });
   };
 
   const handleTimeout = () => {
@@ -230,17 +214,11 @@ export default function GameScreen() {
               maxLength={20}
               required
             />
-            <button type="submit" className="start-btn">
+            <button type="submit" className="btn-hex-game">
               Start Game ➔
             </button>
           </form>
         </div>
-        <style>{`
-          .quiz-main-title { color: #f1c40f; margin-bottom: 20px; font-size: 1.8rem; }
-          .start-card { background: rgba(15, 23, 42, 0.8); padding: 30px; border-radius: 16px; border: 1px solid #00d2ff; max-width: 400px; margin: 0 auto; }
-          .player-input { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #334155; background: #0f172a; color: #fff; margin: 15px 0; text-align: center; font-size: 1.1rem; }
-          .start-btn { width: 100%; padding: 12px; border-radius: 8px; border: none; background: #00d2ff; color: #000; font-weight: bold; cursor: pointer; font-size: 1rem; }
-        `}</style>
       </div>
     );
   }
@@ -256,12 +234,22 @@ export default function GameScreen() {
             Correct: <span className="correct-text">{correctCount}</span> |
             Wrong: <span className="wrong-text">{wrongCount}</span>
           </p>
-          <button
-            className="start-btn"
-            onClick={() => window.location.reload()}
-          >
-            Play Again 🔄
-          </button>
+
+          <div className="final-actions">
+            <button
+              className="btn-hex-game"
+              onClick={() => window.location.reload()}
+            >
+              Try Again 🔄
+            </button>
+
+            <button
+              className="btn-hex-game btn-hex-game--secondary"
+              onClick={() => navigate("/game")}
+            >
+              ← Other Quizzes
+            </button>
+          </div>
         </div>
       </div>
     );
@@ -321,25 +309,6 @@ export default function GameScreen() {
           );
         })}
       </div>
-
-      <style>{`
-        .game-page { max-width: 800px; margin: 0 auto; padding: 20px; color: #fff; }
-        .quiz-main-title { color: #f1c40f; font-size: 1.6rem; margin-bottom: 5px; }
-        .player-badge { color: #94a3b8; font-size: 0.95rem; margin-bottom: 15px; }
-        .stats-bar { display: flex; justify-content: center; gap: 20px; font-weight: bold; margin-bottom: 10px; }
-        .correct-text { color: #2ecc71; }
-        .wrong-text { color: #e74c3c; }
-        .timer-track { width: 100%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; margin-bottom: 25px; }
-        .timer-fill { height: 100%; background: #f1c40f; transition: width 1s linear; }
-        .question-title { text-align: center; font-size: 1.25rem; margin-bottom: 25px; line-height: 1.4; }
-        .answers-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
-        @media (min-width: 600px) { .answers-grid { grid-template-columns: 1fr 1fr; } }
-        .answer-btn { background: rgba(15, 23, 42, 0.7); border: 2px solid #00d2ff; border-radius: 12px; padding: 14px 18px; color: #fff; text-align: left; cursor: pointer; transition: all 0.2s; font-size: 1rem; }
-        .answer-btn:hover:not(:disabled) { border-color: #ff9f43; }
-        .answer-btn.correct { border-color: #2ecc71 !important; background: rgba(46, 204, 113, 0.25) !important; }
-        .answer-btn.wrong { border-color: #e74c3c !important; background: rgba(231, 76, 60, 0.25) !important; }
-        .prefix { color: #ff9f43; font-weight: bold; margin-right: 6px; }
-      `}</style>
     </div>
   );
 }
