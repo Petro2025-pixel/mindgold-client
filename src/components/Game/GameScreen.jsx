@@ -137,7 +137,9 @@ export default function GameScreen() {
     const questionId = currentQuestion._id || currentQuestion.id;
     // Guard: if the question has no valid id, treat as wrong without a network call
     if (!questionId) {
-      console.error("Question is missing a valid id:", currentQuestion);
+      if (import.meta.env.DEV) {
+        console.error("Question is missing a valid id:", currentQuestion);
+      }
       setWrongCount((w) => w + 1);
       nextQuestionWithDelay();
       return;
@@ -172,7 +174,9 @@ export default function GameScreen() {
         }
       }
     } catch (err) {
-      console.error("Check error:", err);
+      if (import.meta.env.DEV) {
+        console.error("Check error:", err);
+      }
       setWrongCount((w) => w + 1);
     }
 

@@ -11,7 +11,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = import.meta.env.VITE_API_URL || "https://mindgold.top/api/v1";
 
 /**
  * Ordered list of checks executed by {@link SystemCheck}.
