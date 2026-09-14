@@ -15,7 +15,7 @@
 
 .footer-container {
   width: 100%;
-  max-width: 1200px; 
+  max-width: 1200px;
   padding: 0 2rem;
   display: flex;
   justify-content: space-between;
@@ -33,16 +33,19 @@
 .btn-footer-action {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
+  height: 32px;
+  padding: 0 12px;
   background: rgba(18, 5, 36, 0.8);
   border: 1px solid rgba(241, 196, 15, 0.3);
   color: #f1c40f;
-  padding: 6px 14px;
-  border-radius: 6px;
+  border-radius: 4px;
   font-size: 0.8rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
+  box-sizing: border-box;
 }
 
 .btn-footer-action:hover {
@@ -60,7 +63,8 @@
   }
 
   .btn-footer-action {
-    padding: 6px 10px;
+    padding: 0 10px;
+    min-width: 32px;
   }
 }
 .mobile-break {

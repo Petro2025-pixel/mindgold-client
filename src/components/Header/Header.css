@@ -42,9 +42,11 @@
 .btn-return-now {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
-  padding: 5px 12px;
-  border-radius: 6px;
+  height: 32px;
+  padding: 0 12px;
+  border-radius: 4px;
   border: 1px solid rgba(241, 196, 15, 0.4);
   background: rgba(18, 5, 36, 0.6);
   color: #f1c40f;
@@ -52,6 +54,7 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
+  box-sizing: border-box;
 }
 
 .btn-return-now:hover {
@@ -76,7 +79,8 @@
     display: none;
   }
   .btn-return-now {
-    padding: 6px 10px;
+    padding: 0 10px;
+    min-width: 32px;
   }
   .return-arrow {
     animation: move-left 1.2s infinite alternate ease-in-out;
@@ -120,10 +124,12 @@
 .lang-btn--trigger {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  min-width: 76px;
-  padding: 5px 10px;
   justify-content: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 12px;
+  min-width: 76px;
+  box-sizing: border-box;
 }
 
 .lang-flag {
@@ -215,8 +221,9 @@
 @media (max-width: 768px) {
   .lang-btn--trigger {
     min-width: 60px;
-    padding: 5px 8px;
+    padding: 0 10px;
     gap: 4px;
+    height: 32px;
   }
 
   .lang-flag {
