@@ -80,5 +80,27 @@
     "statusCheckingShort": "PRÜFUNG...",
     "statusOkShort": "OK",
     "statusErrorShort": "OFFLINE"
+  },
+  "game": {
+    "loading": "Quiz wird geladen...",
+    "error": "Fehler: {{message}}",
+    "defaultTitle": "MindGold Quiz",
+    "enterName": "Gib deinen Namen ein, um zu starten",
+    "playerNamePlaceholder": "Spielername",
+    "startButton": "Spiel starten ➔",
+    "player": "Spieler: {{name}}",
+    "progress": "F: {{current}}/{{total}}",
+    "correct": "Richtig",
+    "wrong": "Falsch",
+    "congratulations": "🎉 Herzlichen Glückwunsch, {{name}}!",
+    "tryAgain": "Nochmal 🔄",
+    "otherQuizzes": "← Andere Quizze"
+  },
+  "quizList": {
+    "title": "Quiz auswählen",
+    "subtitle": "Teste dein Wissen im interaktiven Spielmodus",
+    "questions_one": "{{count}} Frage",
+    "questions_other": "{{count}} Fragen",
+    "startButton": "Spiel starten →"
   }
 }

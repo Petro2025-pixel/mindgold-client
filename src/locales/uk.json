@@ -80,5 +80,29 @@
     "statusCheckingShort": "ПЕРЕВІРКА...",
     "statusOkShort": "OK",
     "statusErrorShort": "ОФЛАЙН"
+  },
+  "game": {
+    "loading": "Завантаження вікторини...",
+    "error": "Помилка: {{message}}",
+    "defaultTitle": "MindGold Вікторина",
+    "enterName": "Введіть ім'я для початку",
+    "playerNamePlaceholder": "Ім'я гравця",
+    "startButton": "Почати гру ➔",
+    "player": "Гравець: {{name}}",
+    "progress": "П: {{current}}/{{total}}",
+    "correct": "Правильно",
+    "wrong": "Неправильно",
+    "congratulations": "🎉 Вітаємо, {{name}}!",
+    "tryAgain": "Спробувати ще 🔄",
+    "otherQuizzes": "← Інші вікторини"
+  },
+  "quizList": {
+    "title": "Оберіть вікторину",
+    "subtitle": "Перевірте свої знання в інтерактивному режимі",
+    "questions_one": "{{count}} запитання",
+    "questions_few": "{{count}} запитання",
+    "questions_many": "{{count}} запитань",
+    "questions_other": "{{count}} запитань",
+    "startButton": "Почати гру →"
   }
 }

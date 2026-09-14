@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./Header.css";
@@ -7,8 +7,18 @@ import "./Header.css";
 const API_URL = import.meta.env.VITE_API_URL || "";
 
 /**
+ * Supported languages shown in the dropdown.
+ * @type {Array<{code: string, label: string, flag: string}>}
+ */
+const LANGUAGES = [
+  { code: "en", label: "EN", flag: "🇬🇧" },
+  { code: "de", label: "DE", flag: "🇩🇪" },
+  { code: "uk", label: "UK", flag: "🇺🇦" },
+];
+
+/**
  * Header Component
- * Sticky top navigation bar containing return button, language switcher, and live API status indicator.
+ * Sticky top navigation bar containing return button, language dropdown, and live API status indicator.
  *
  * @component
  * @returns {React.ReactElement} The rendered Header navigation bar.
@@ -20,6 +30,10 @@ export const Header = () => {
 
   // API status state: 'ok' | 'error' | 'checking'
   const [apiStatus, setApiStatus] = useState("checking");
+
+  // Language dropdown state
+  const [isLangOpen, setIsLangOpen] = useState(false);
+  const langDropdownRef = useRef(null);
 
   // Check if current route is NOT the home page
   const showReturnButton = location.pathname !== "/";
@@ -57,10 +71,49 @@ export const Header = () => {
     return () => clearInterval(interval);
   }, []);
 
+  /**
+   * Close language dropdown on outside click / touch / Escape.
+   */
+  useEffect(() => {
+    if (!isLangOpen) return;
+
+    const handleOutside = (e) => {
+      if (
+        langDropdownRef.current &&
+        !langDropdownRef.current.contains(e.target)
+      ) {
+        setIsLangOpen(false);
+      }
+    };
+
+    const handleEscape = (e) => {
+      if (e.key === "Escape") setIsLangOpen(false);
+    };
+
+    document.addEventListener("click", handleOutside);
+    document.addEventListener("touchstart", handleOutside);
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("click", handleOutside);
+      document.removeEventListener("touchstart", handleOutside);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [isLangOpen]);
+
+  /**
+   * Switch language and close dropdown.
+   * @param {string} code - Language code ("en" | "de" | "uk").
+   */
+  const handleSelectLanguage = (code) => {
+    i18n.changeLanguage(code);
+    setIsLangOpen(false);
+  };
+
   return (
     <header className="app-header">
       <div className="header-container">
-        {/* Left section: Navigation back button & Language switcher group */}
+        {/* Left section: Navigation back button & Language dropdown */}
         <div className="header-left">
           {showReturnButton && (
             <button
@@ -75,26 +128,44 @@ export const Header = () => {
             </button>
           )}
 
-          {/* Language selector controls */}
-          <div className="lang-switcher-group">
+          {/* Language dropdown */}
+          <div className="lang-dropdown" ref={langDropdownRef}>
             <button
-              className={`lang-btn ${i18n.language === "en" ? "active" : ""}`}
-              onClick={() => i18n.changeLanguage("en")}
+              className={`lang-btn lang-btn--trigger ${
+                isLangOpen ? "open" : ""
+              }`}
+              onClick={() => setIsLangOpen((v) => !v)}
+              title={t("header.changeLanguage", "Change language")}
+              aria-haspopup="true"
+              aria-expanded={isLangOpen}
             >
-              EN
+              <span className="lang-flag">
+                {LANGUAGES.find((l) => l.code === i18n.language)?.flag || "🌐"}
+              </span>
+              <span className="lang-code">{i18n.language.toUpperCase()}</span>
+              <span className="lang-caret">▼</span>
             </button>
-            <button
-              className={`lang-btn ${i18n.language === "de" ? "active" : ""}`}
-              onClick={() => i18n.changeLanguage("de")}
-            >
-              DE
-            </button>
-            <button
-              className={`lang-btn ${i18n.language === "uk" ? "active" : ""}`}
-              onClick={() => i18n.changeLanguage("uk")}
-            >
-              UK
-            </button>
+
+            {isLangOpen && (
+              <div className="lang-dropdown-menu" role="menu">
+                {LANGUAGES.map((lang) => (
+                  <button
+                    key={lang.code}
+                    className={`lang-dropdown-item ${
+                      i18n.language === lang.code ? "active" : ""
+                    }`}
+                    onClick={() => handleSelectLanguage(lang.code)}
+                    role="menuitem"
+                  >
+                    <span className="lang-flag">{lang.flag}</span>
+                    <span className="lang-code">{lang.label}</span>
+                    {i18n.language === lang.code && (
+                      <span className="lang-check">✓</span>
+                    )}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
         </div>
 

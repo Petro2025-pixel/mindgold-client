@@ -80,5 +80,27 @@
     "statusCheckingShort": "CHECKING...",
     "statusOkShort": "OK",
     "statusErrorShort": "OFFLINE"
+  },
+  "game": {
+    "loading": "Loading quiz...",
+    "error": "Error: {{message}}",
+    "defaultTitle": "MindGold Quiz",
+    "enterName": "Enter your name to start",
+    "playerNamePlaceholder": "Player Name",
+    "startButton": "Start Game ➔",
+    "player": "Player: {{name}}",
+    "progress": "Q: {{current}}/{{total}}",
+    "correct": "Correct",
+    "wrong": "Wrong",
+    "congratulations": "🎉 Congratulations, {{name}}!",
+    "tryAgain": "Try Again 🔄",
+    "otherQuizzes": "← Other Quizzes"
+  },
+  "quizList": {
+    "title": "Select a Quiz",
+    "subtitle": "Test your knowledge in an interactive game mode",
+    "questions_one": "{{count}} question",
+    "questions_other": "{{count}} questions",
+    "startButton": "Start Game →"
   }
 }

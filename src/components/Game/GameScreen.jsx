@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import confetti from "canvas-confetti";
 import "./GameScreen.css";
 
@@ -18,6 +19,7 @@ function shuffleArray(array) {
 export default function GameScreen() {
   const { slug } = useParams();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [quiz, setQuiz] = useState(null);
   const [questions, setQuestions] = useState([]);
   const [current, setCurrent] = useState(0);
@@ -192,30 +194,35 @@ export default function GameScreen() {
   };
 
   if (loading)
-    return <div className="game-page text-center">Loading quiz...</div>;
-  if (error) return <div className="game-page text-center">Error: {error}</div>;
+    return <div className="game-page text-center">{t("game.loading")}</div>;
+  if (error)
+    return (
+      <div className="game-page text-center">
+        {t("game.error", { message: error })}
+      </div>
+    );
 
   // Step 1: Player Name Entry Screen
   if (!gameStarted) {
     return (
       <div className="game-page text-center">
         <h1 className="quiz-main-title">
-          {quiz?.quizTitle || quiz?.title || "MindGold Quiz"}
+          {quiz?.quizTitle || quiz?.title || t("game.defaultTitle")}
         </h1>
         <div className="start-card">
-          <h3>Enter your name to start</h3>
+          <h3>{t("game.enterName")}</h3>
           <form onSubmit={handleStartGame}>
             <input
               type="text"
               className="player-input"
-              placeholder="Player Name"
+              placeholder={t("game.playerNamePlaceholder")}
               value={playerName}
               onChange={(e) => setPlayerName(e.target.value)}
               maxLength={20}
               required
             />
             <button type="submit" className="btn-hex-game">
-              Start Game ➔
+              {t("game.startButton")}
             </button>
           </form>
         </div>
@@ -229,10 +236,11 @@ export default function GameScreen() {
       <div className="game-page text-center">
         <h1 className="quiz-main-title">{quiz?.quizTitle || quiz?.title}</h1>
         <div className="start-card">
-          <h2>🎉 Congratulations, {playerName}!</h2>
+          <h2>{t("game.congratulations", { name: playerName })}</h2>
           <p className="final-stats">
-            Correct: <span className="correct-text">{correctCount}</span> |
-            Wrong: <span className="wrong-text">{wrongCount}</span>
+            {t("game.correct")}:{" "}
+            <span className="correct-text">{correctCount}</span> |{" "}
+            {t("game.wrong")}: <span className="wrong-text">{wrongCount}</span>
           </p>
 
           <div className="final-actions">
@@ -240,14 +248,14 @@ export default function GameScreen() {
               className="btn-hex-game"
               onClick={() => window.location.reload()}
             >
-              Try Again 🔄
+              {t("game.tryAgain")}
             </button>
 
             <button
               className="btn-hex-game btn-hex-game--secondary"
               onClick={() => navigate("/game")}
             >
-              ← Other Quizzes
+              {t("game.otherQuizzes")}
             </button>
           </div>
         </div>
@@ -264,14 +272,17 @@ export default function GameScreen() {
       <div className="quiz-header text-center">
         <h1 className="quiz-main-title">{quiz?.quizTitle || quiz?.title}</h1>
         <div className="player-badge">
-          👤 Player: <strong>{playerName}</strong>
+          👤 <strong>{t("game.player", { name: playerName })}</strong>
         </div>
       </div>
 
       {/* Stats Bar */}
       <div className="stats-bar">
         <span>
-          Q: {current + 1}/{questions.length}
+          {t("game.progress", {
+            current: current + 1,
+            total: questions.length,
+          })}
         </span>
         <span className="correct-text">✅ {correctCount}</span>
         <span className="wrong-text">❌ {wrongCount}</span>

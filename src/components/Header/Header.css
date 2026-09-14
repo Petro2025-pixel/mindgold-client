@@ -1,17 +1,15 @@
 .app-header {
   width: 100%;
-  height: 60px; /* Fixed height for precise layout calculations */
+  height: 60px;
   display: flex;
   justify-content: center;
   padding: 0.75rem 0;
-  
-  /* Background styling & glassmorphism blur overlay */
+
   background: rgba(15, 15, 25, 0.75);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(241, 196, 15, 0.15);
-  
-  /* Sticky positioning to keep header visible on scroll */
+
   position: sticky;
   top: 0;
   z-index: 100;
@@ -19,26 +17,19 @@
 
 .header-container {
   width: 100%;
-  max-width: 1140px; /* Aligns with main content grid width */
+  max-width: 1140px;
   padding: 0 1.5rem;
   display: flex;
-  justify-content: space-between; /* Spreads items to far left & right */
+  justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
 }
 
-/* Left section wrapper: Return button and language controls */
+/* Left section: Return button + Language dropdown */
 .header-left {
   display: flex;
   align-items: center;
-  gap: 20px; /* Spacing between return button and language switcher group */
-}
-
-/* Language switcher button group wrapper */
-.lang-switcher-group {
-  display: flex;
-  align-items: center;
-  gap: 6px; /* Spacing between individual language buttons (EN, DE, UK) */
+  gap: 20px;
 }
 
 .header-right {
@@ -47,7 +38,7 @@
   gap: 8px;
 }
 
-/* Navigation return button styling */
+/* ---------- Navigation return button ---------- */
 .btn-return-now {
   display: inline-flex;
   align-items: center;
@@ -77,18 +68,16 @@
 }
 
 .btn-return-now:hover .return-arrow {
-  transform: scaleX(-1) translateX(4px); 
+  transform: scaleX(-1) translateX(4px);
 }
 
 @media (max-width: 768px) {
   .btn-return-now .btn-text {
     display: none;
   }
-
   .btn-return-now {
     padding: 6px 10px;
   }
-
   .return-arrow {
     animation: move-left 1.2s infinite alternate ease-in-out;
   }
@@ -103,7 +92,12 @@
   }
 }
 
-/* Language selection button styling */
+/* ---------- Language dropdown ---------- */
+.lang-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
 .lang-btn {
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -116,13 +110,135 @@
   transition: all 0.2s ease;
 }
 
-.lang-btn.active, .lang-btn:hover {
+.lang-btn:hover,
+.lang-btn.open {
   border-color: #f1c40f;
   color: #f1c40f;
   background: rgba(241, 196, 15, 0.1);
 }
 
-/* Live API status indicator pill */
+.lang-btn--trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 76px;
+  padding: 5px 10px;
+  justify-content: center;
+}
+
+.lang-flag {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.lang-code {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.lang-caret {
+  font-size: 0.6rem;
+  opacity: 0.7;
+  transition: transform 0.2s ease;
+}
+
+.lang-btn.open .lang-caret {
+  transform: rotate(180deg);
+}
+
+/* ---------- Dropdown menu ---------- */
+.lang-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  min-width: 120px;
+  max-width: 80vw;
+  background: rgba(15, 15, 25, 0.98);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(241, 196, 15, 0.3);
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 200;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+  animation: dropdownFade 0.15s ease-out;
+}
+
+@keyframes dropdownFade {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.lang-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px 14px;
+  background: transparent;
+  border: none;
+  color: #a0a0c0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s ease;
+  min-height: 44px;
+}
+
+.lang-dropdown-item:hover,
+.lang-dropdown-item:focus {
+  background: rgba(241, 196, 15, 0.12);
+  color: #f1c40f;
+  outline: none;
+}
+
+.lang-dropdown-item.active {
+  background: rgba(241, 196, 15, 0.18);
+  color: #f1c40f;
+}
+
+.lang-check {
+  margin-left: auto;
+  font-size: 0.85rem;
+  color: #f1c40f;
+}
+
+/* ---------- Mobile adjustments ---------- */
+@media (max-width: 768px) {
+  .lang-btn--trigger {
+    min-width: 60px;
+    padding: 5px 8px;
+    gap: 4px;
+  }
+
+  .lang-flag {
+    font-size: 0.9rem;
+  }
+
+  .lang-code {
+    font-size: 0.75rem;
+  }
+
+  .lang-dropdown-menu {
+    min-width: 110px;
+  }
+
+  .lang-dropdown-item {
+    padding: 11px 12px;
+    font-size: 0.85rem;
+    gap: 8px;
+  }
+}
+
+/* ---------- Live API status pill (unchanged) ---------- */
 .live-status {
   font-size: 0.8rem;
   color: #8a8aa3;
@@ -140,28 +256,26 @@
   height: 8px;
   border-radius: 50%;
   flex-shrink: 0;
-  transition: background-color 0.8s ease, box-shadow 0.8s ease;
+  transition:
+    background-color 0.8s ease,
+    box-shadow 0.8s ease;
 }
 
-/* Operational API status (Green) */
 .live-status.status-ok .status-dot {
   background-color: #2ecc71;
   box-shadow: 0 0 8px #2ecc71;
 }
 
-/* Unreachable/Failed API status (Red) */
 .live-status.status-error .status-dot {
   background-color: #e74c3c;
   box-shadow: 0 0 8px #e74c3c;
 }
 
-/* Checking API status with pulse animation (Yellow) */
 .live-status.status-checking .status-dot {
   background-color: #f1c40f;
   animation: pulse-blink 0.6s infinite alternate ease-in-out;
 }
 
-/* Smooth blinking keyframe animation for active ping state */
 @keyframes pulse-blink {
   0% {
     opacity: 0.3;
@@ -177,7 +291,6 @@
   .live-status .status-text {
     display: none;
   }
-
   .live-status {
     padding: 4px 8px;
     gap: 4px;
