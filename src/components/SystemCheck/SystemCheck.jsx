@@ -10,6 +10,7 @@
 
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useApiStatus } from "../../context/ApiStatusContext";
 
 const API_URL = import.meta.env.VITE_API_URL || "https://mindgold.top/api/v1";
 
@@ -58,6 +59,7 @@ const CHECKS = [
  */
 export default function SystemCheck() {
   const { t } = useTranslation();
+  const { checkNow } = useApiStatus();
 
   /**
    * Maps each check's `key` to its current status string.
@@ -78,7 +80,7 @@ export default function SystemCheck() {
    */
   const runAll = async () => {
     setRunning(true);
-    if (window.triggerHeaderCheck) window.triggerHeaderCheck();
+    await checkNow();
     for (const check of CHECKS) {
       setResults((r) => ({ ...r, [check.key]: "pending" }));
       try {

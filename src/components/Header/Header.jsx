@@ -1,10 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useApiStatus } from "../../context/ApiStatusContext";
 import "./Header.css";
-
-// Retrieve API URL from environment variables, fallback to relative path if undefined
-const API_URL = import.meta.env.VITE_API_URL || "";
 
 /**
  * Supported languages shown in the dropdown.
@@ -27,9 +25,7 @@ export const Header = () => {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
-
-  // API status state: 'ok' | 'error' | 'checking'
-  const [apiStatus, setApiStatus] = useState("checking");
+  const { status: apiStatus } = useApiStatus();
 
   // Language dropdown state
   const [isLangOpen, setIsLangOpen] = useState(false);
@@ -37,39 +33,6 @@ export const Header = () => {
 
   // Check if current route is NOT the home page
   const showReturnButton = location.pathname !== "/";
-
-  /**
-   * Fetches backend health check endpoint to update status indicator.
-   */
-  const MIN_CHECKING_DURATION = 1000;
-
-  const checkHealth = async () => {
-    setApiStatus("checking");
-    const startedAt = Date.now();
-    let result = "error";
-
-    try {
-      const res = await fetch(`${API_URL}/health`);
-      result = res.ok ? "ok" : "error";
-    } catch {
-      result = "error";
-    }
-
-    const elapsed = Date.now() - startedAt;
-    const remaining = MIN_CHECKING_DURATION - elapsed;
-    if (remaining > 0) {
-      await new Promise((resolve) => setTimeout(resolve, remaining));
-    }
-
-    setApiStatus(result);
-  };
-
-  useEffect(() => {
-    window.triggerHeaderCheck = checkHealth;
-    checkHealth();
-    const interval = setInterval(checkHealth, 30000);
-    return () => clearInterval(interval);
-  }, []);
 
   /**
    * Close language dropdown on outside click / touch / Escape.
