@@ -165,13 +165,8 @@ export default function GameScreen() {
         triggerSmallConfetti();
       } else {
         setWrongCount((w) => w + 1);
-        // If the server returns the text of the correct answer, find its index in the current shuffled array
-        if (data.correctAnswerText) {
-          const correctIdx = currentQuestion.answers.indexOf(
-            data.correctAnswerText,
-          );
-          setCorrectAnswerIdx(correctIdx);
-        }
+        // Highlight the correct answer locally (server no longer returns it)
+        setCorrectAnswerIdx(currentQuestion.correct);
       }
     } catch (err) {
       if (import.meta.env.DEV) {
