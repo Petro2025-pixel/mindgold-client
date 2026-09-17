@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { lockScroll, unlockScroll } from "../../utils/scrollLock";
 import "./Modal.css";
@@ -28,14 +28,17 @@ export const Modal = ({
 }) => {
   const { t } = useTranslation();
 
+  const onCloseRef = useRef(onClose);
+
+  // Keep ref in sync with latest onClose without re-running the effect
   useEffect(() => {
-    /**
-     * Handles keyboard events to close the modal on 'Escape'.
-     * @param {KeyboardEvent} event - The keyboard event object.
-     */
+    onCloseRef.current = onClose;
+  }, [onClose]);
+
+  useEffect(() => {
     const handleKeyDown = (event) => {
-      if (event.key === "Escape" && onClose) {
-        onClose();
+      if (event.key === "Escape" && onCloseRef.current) {
+        onCloseRef.current();
       }
     };
 
@@ -50,7 +53,7 @@ export const Modal = ({
         unlockScroll();
       }
     };
-  }, [isOpen, onClose]);
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
