@@ -1,10 +1,10 @@
-import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
-import LanguageDetector from 'i18next-browser-languagedetector';
+import i18n from "i18next";
+import { initReactI18next } from "react-i18next";
+import LanguageDetector from "i18next-browser-languagedetector";
 
-import en from './locales/en.json';
-import de from './locales/de.json';
-import uk from './locales/uk.json';
+import en from "./locales/en.json";
+import de from "./locales/de.json";
+import uk from "./locales/uk.json";
 
 /**
  * Internationalization (i18n) Configuration.
@@ -22,9 +22,12 @@ i18n
       de: { translation: de },
       uk: { translation: uk },
     },
-    fallbackLng: 'en',
+    fallbackLng: "en",
+    supportedLngs: ["en", "de", "uk"],
+    nonExplicitSupportedLngs: false,
+    load: "languageOnly",
     interpolation: {
-      escapeValue: false, // React already safeguards from XSS
+      escapeValue: false,
     },
   });
 

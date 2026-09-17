@@ -103,9 +103,13 @@ export const Header = () => {
               aria-expanded={isLangOpen}
             >
               <span className="lang-flag">
-                {LANGUAGES.find((l) => l.code === i18n.language)?.flag || "🌐"}
+                {LANGUAGES.find(
+                  (l) => l.code === (i18n.resolvedLanguage || i18n.language),
+                )?.flag || "🌐"}
               </span>
-              <span className="lang-code">{i18n.language.toUpperCase()}</span>
+              <span className="lang-code">
+                {(i18n.resolvedLanguage || i18n.language).toUpperCase()}
+              </span>
               <span className="lang-caret">▼</span>
             </button>
 
@@ -115,14 +119,16 @@ export const Header = () => {
                   <button
                     key={lang.code}
                     className={`lang-dropdown-item ${
-                      i18n.language === lang.code ? "active" : ""
+                      (i18n.resolvedLanguage || i18n.language) === lang.code
+                        ? "active"
+                        : ""
                     }`}
                     onClick={() => handleSelectLanguage(lang.code)}
                     role="menuitem"
                   >
                     <span className="lang-flag">{lang.flag}</span>
                     <span className="lang-code">{lang.label}</span>
-                    {i18n.language === lang.code && (
+                    {(i18n.resolvedLanguage || i18n.language) === lang.code && (
                       <span className="lang-check">✓</span>
                     )}
                   </button>
