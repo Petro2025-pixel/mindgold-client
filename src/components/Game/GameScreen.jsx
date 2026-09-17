@@ -40,8 +40,14 @@ export default function GameScreen() {
   const [gameStarted, setGameStarted] = useState(false);
 
   const timerRef = useRef(null);
+  const delayTimeoutRef = useRef(null);
 
   useEffect(() => {
+    // Reset pending delay when switching quizzes
+    if (delayTimeoutRef.current) {
+      clearTimeout(delayTimeoutRef.current);
+      delayTimeoutRef.current = null;
+    }
     setLoading(true);
     fetch(`${API_URL}/quizzes/${slug}`)
       .then((res) => {
@@ -74,6 +80,16 @@ export default function GameScreen() {
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
   }, [slug]);
+
+  // Cleanup pending timeout on unmount (prevents setState on unmounted component)
+  useEffect(() => {
+    return () => {
+      if (delayTimeoutRef.current) {
+        clearTimeout(delayTimeoutRef.current);
+        delayTimeoutRef.current = null;
+      }
+    };
+  }, []);
 
   useEffect(() => {
     if (!gameStarted || finished || isAnswered || loading) return;
@@ -179,7 +195,14 @@ export default function GameScreen() {
   };
 
   const nextQuestionWithDelay = () => {
-    setTimeout(() => {
+    // Clear any pending timeout to avoid double-advance race conditions
+    if (delayTimeoutRef.current) {
+      clearTimeout(delayTimeoutRef.current);
+    }
+
+    delayTimeoutRef.current = setTimeout(() => {
+      delayTimeoutRef.current = null;
+
       if (current + 1 < questions.length) {
         setCurrent((c) => c + 1);
         setSelectedAnswer(null);
