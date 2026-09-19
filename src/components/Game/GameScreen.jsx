@@ -91,6 +91,29 @@ export default function GameScreen() {
     };
   }, []);
 
+  // Save score to backend when game finishes
+  useEffect(() => {
+    if (!finished) return;
+    if (!playerName.trim()) return;
+
+    const payload = {
+      playerName: playerName.trim(),
+      slug,
+      score: correctCount,
+      total: questions.length,
+    };
+
+    fetch(`${API_URL}/scores`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    }).catch((err) => {
+      if (import.meta.env.DEV) {
+        console.error("Failed to save score:", err);
+      }
+    });
+  }, [finished]);
+
   useEffect(() => {
     if (!gameStarted || finished || isAnswered || loading) return;
 
@@ -133,7 +156,6 @@ export default function GameScreen() {
     setWrongCount((w) => w + 1);
     nextQuestionWithDelay();
   };
-
   const handleStartGame = (e) => {
     e.preventDefault();
     if (!playerName.trim()) return;
