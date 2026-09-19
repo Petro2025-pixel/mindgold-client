@@ -12,6 +12,7 @@ import { Modal } from "./components/Modal/Modal";
 import { CookieConsent } from "./components/CookieConsent/CookieConsent";
 import GameScreen from "./components/Game/GameScreen";
 import QuizList from "./components/Game/QuizList";
+import Leaderboard from "./components/Leaderboard/Leaderboard";
 import "./index.css";
 
 /**
@@ -85,6 +86,7 @@ export default function App() {
 
           {/* Переход на конкретный квиз по slug */}
           <Route path="/game/:slug" element={<GameScreen />} />
+          <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>

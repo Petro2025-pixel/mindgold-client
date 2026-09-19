@@ -104,5 +104,18 @@
     "questions_many": "{{count}} запитань",
     "questions_other": "{{count}} запитань",
     "startButton": "Почати гру →"
+  },
+  "leaderboard": {
+    "title": "🏆 Зал Слави",
+    "subtitle": "Найкращі гравці серед усіх вікторин",
+    "loading": "Завантаження рейтингу...",
+    "error": "Помилка: {{message}}",
+    "empty": "Ще немає зіграних ігор. Будьте першим!",
+    "colPlayer": "Гравець",
+    "colScore": "Результат",
+    "colGames": "Ігри",
+    "colLastPlayed": "Остання гра",
+    "backToMenu": "До меню",
+    "playNow": "Грати ➔"
   }
 }

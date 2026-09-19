@@ -102,5 +102,18 @@
     "questions_one": "{{count}} question",
     "questions_other": "{{count}} questions",
     "startButton": "Start Game →"
+  },
+  "leaderboard": {
+    "title": "🏆 Hall of Fame",
+    "subtitle": "Top players across all quizzes",
+    "loading": "Loading leaderboard...",
+    "error": "Error: {{message}}",
+    "empty": "No games played yet. Be the first to set a record!",
+    "colPlayer": "Player",
+    "colScore": "Score",
+    "colGames": "Games",
+    "colLastPlayed": "Last Played",
+    "backToMenu": "Back to Menu",
+    "playNow": "Play Now ➔"
   }
 }

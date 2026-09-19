@@ -102,5 +102,18 @@
     "questions_one": "{{count}} Frage",
     "questions_other": "{{count}} Fragen",
     "startButton": "Spiel starten →"
+  },
+  "leaderboard": {
+    "title": "🏆 Ruhmeshalle",
+    "subtitle": "Top-Spieler aus allen Quizzen",
+    "loading": "Bestenliste wird geladen...",
+    "error": "Fehler: {{message}}",
+    "empty": "Noch keine Spiele gespielt. Sei der Erste!",
+    "colPlayer": "Spieler",
+    "colScore": "Ergebnis",
+    "colGames": "Spiele",
+    "colLastPlayed": "Zuletzt gespielt",
+    "backToMenu": "Zurück zum Menü",
+    "playNow": "Jetzt spielen ➔"
   }
 }
