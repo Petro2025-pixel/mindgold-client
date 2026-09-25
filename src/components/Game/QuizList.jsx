@@ -7,6 +7,16 @@ import "./QuizList.css";
  * @constant {string} API_URL - Base API endpoint for quiz collection retrieval.
  */
 const API_URL = "https://mindgold.top/api/v1";
+/**
+ * Formats category slug for display: "deutsch-b1" → "Deutsch B1"
+ * @param {string} slug
+ * @returns {string}
+ */
+const formatCategory = (slug) =>
+  slug
+    .split("-")
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(" ");
 
 /**
  * Quiz selection list component.
@@ -48,7 +58,7 @@ export default function QuizList() {
     <div className="quiz-select-container">
       {/* Header section */}
       <div className="quiz-header">
-        <h1>{category}</h1>
+        <h1>{formatCategory(category)}</h1>
         <p>{t("quizList.subtitle")}</p>
       </div>
 
