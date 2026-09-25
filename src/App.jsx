@@ -12,6 +12,7 @@ import { Modal } from "./components/Modal/Modal";
 import { CookieConsent } from "./components/CookieConsent/CookieConsent";
 import GameScreen from "./components/Game/GameScreen";
 import QuizList from "./components/Game/QuizList";
+import CategoryList from "./components/CategoryList/CategoryList";
 import Leaderboard from "./components/Leaderboard/Leaderboard";
 import "./index.css";
 
@@ -81,10 +82,8 @@ export default function App() {
           {/* <Route path="/game" element={<GameScreen />} />
           <Route path="/game/:slug" element={<GameScreen />} /> */}
           {/* <Route path="/editor" element={<EditorScreen />} /> */}
-          {/* Клик по Game Arena ведет на /game, отображаем список квизов */}
-          <Route path="/game" element={<QuizList />} />
-
-          {/* Переход на конкретный квиз по slug */}
+          <Route path="/game" element={<CategoryList />} />
+          <Route path="/game/category/:category" element={<QuizList />} />
           <Route path="/game/:slug" element={<GameScreen />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="*" element={<NotFoundPage />} />

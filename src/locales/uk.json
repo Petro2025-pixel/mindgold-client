@@ -117,5 +117,15 @@
     "colLastPlayed": "Остання гра",
     "backToMenu": "До меню",
     "playNow": "Грати ➔"
+  },
+  "categoryList": {
+    "title": "Оберіть категорію",
+    "subtitle": "Виберіть тему для початку",
+    "quizzesCount_one": "{{count}} квіз",
+    "quizzesCount_few": "{{count}} квізи",
+    "quizzesCount_many": "{{count}} квізів",
+    "open": "Відкрити",
+    "loading": "Завантаження...",
+    "error": "Не вдалося завантажити категорії"
   }
 }

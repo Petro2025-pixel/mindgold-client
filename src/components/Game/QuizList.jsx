@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import "./QuizList.css";
 
@@ -16,6 +16,7 @@ const API_URL = "https://mindgold.top/api/v1";
  * @returns {JSX.Element} Grid interface of available quizzes.
  */
 export default function QuizList() {
+  const { category } = useParams();
   const [quizzes, setQuizzes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -33,11 +34,12 @@ export default function QuizList() {
       })
       .then((data) => {
         const list = data.data || data.quizzes || data;
-        setQuizzes(Array.isArray(list) ? list : []);
+        const arr = Array.isArray(list) ? list : [];
+        setQuizzes(arr.filter((q) => (q.category || "other") === category));
       })
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
-  }, []);
+  }, [category]);
 
   if (loading) return <div className="quiz-status">Loading quizzes...</div>;
   if (error) return <div className="quiz-status error">Error: {error}</div>;
@@ -46,7 +48,7 @@ export default function QuizList() {
     <div className="quiz-select-container">
       {/* Header section */}
       <div className="quiz-header">
-        <h1>{t("quizList.title")}</h1>
+        <h1>{category}</h1>
         <p>{t("quizList.subtitle")}</p>
       </div>
 

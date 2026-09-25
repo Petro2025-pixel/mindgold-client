@@ -115,5 +115,14 @@
     "colLastPlayed": "Zuletzt gespielt",
     "backToMenu": "Zurück zum Menü",
     "playNow": "Jetzt spielen ➔"
+  },
+  "categoryList": {
+    "title": "Kategorie auswählen",
+    "subtitle": "Wähle ein Thema zum Starten",
+    "quizzesCount_one": "{{count}} Quiz",
+    "quizzesCount_other": "{{count}} Quizze",
+    "open": "Öffnen",
+    "loading": "Wird geladen...",
+    "error": "Kategorien konnten nicht geladen werden"
   }
 }
