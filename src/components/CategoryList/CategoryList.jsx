@@ -18,28 +18,20 @@ const formatCategory = (slug) =>
 
 export default function CategoryList() {
   const [categories, setCategories] = useState([]);
-  const [counts, setCounts] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const { t } = useTranslation();
 
   useEffect(() => {
-    Promise.all([
-      fetch(`${API_URL}/quizzes/categories`).then((r) => r.json()),
-      fetch(`${API_URL}/quizzes`).then((r) => r.json()),
-    ])
-      .then(([cats, quizzesData]) => {
-        const list = quizzesData.data || quizzesData.quizzes || quizzesData;
-        const arr = Array.isArray(list) ? list : [];
-        setCategories(cats);
-
-        const c = {};
-        arr.forEach((q) => {
-          const key = q.category || "other";
-          c[key] = (c[key] || 0) + 1;
-        });
-        setCounts(c);
+    fetch(`${API_URL}/categories`)
+      .then((r) => {
+        if (!r.ok) throw new Error("Failed to load categories");
+        return r.json();
+      })
+      .then((data) => {
+        const list = data.categories || [];
+        setCategories(list.filter((c) => c.slug && c.slug !== "other"));
       })
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
@@ -60,15 +52,15 @@ export default function CategoryList() {
       <div className="quiz-grid">
         {categories.map((cat) => (
           <div
-            key={cat}
+            key={cat.slug}
             className="quiz-card"
-            onClick={() => navigate(`/game/category/${cat}`)}
+            onClick={() => navigate(`/game/category/${cat.slug}`)}
           >
             <div className="quiz-card-content">
               <span className="quiz-badge">
-                {t("categoryList.quizzesCount", { count: counts[cat] || 0 })}
+                {t("categoryList.quizzesCount", { count: cat.count })}
               </span>
-              <h3 className="quiz-card-title">{formatCategory(cat)}</h3>
+              <h3 className="quiz-card-title">{formatCategory(cat.slug)}</h3>
             </div>
             <div className="quiz-card-footer">
               <span className="play-link">{t("categoryList.open")} →</span>
