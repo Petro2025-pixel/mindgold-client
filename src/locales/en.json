@@ -141,5 +141,11 @@
     "hint": "You can sign back in anytime — your data stays safe.",
     "confirm": "Sign out",
     "cancel": "Stay"
+  },
+  "exitGame": {
+    "title": "Leave the game?",
+    "hint": "Are you sure you want to leave? Your progress will be lost.",
+    "confirm": "Yes",
+    "cancel": "No"
   }
 }

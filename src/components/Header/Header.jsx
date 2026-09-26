@@ -5,6 +5,7 @@ import { useApiStatus } from "../../context/ApiStatusContext";
 import { useAuth } from "../../context/AuthContext";
 import { LoginModal } from "../Login/LoginModal";
 import { LogoutModal } from "../Logout/LogoutModal";
+import { ExitGameModal } from "../Game/ExitGameModal";
 import "./Header.css";
 
 /**
@@ -45,6 +46,7 @@ export const Header = () => {
   // Auth modals state
   const [loginOpen, setLoginOpen] = useState(false);
   const [logoutOpen, setLogoutOpen] = useState(false);
+  const [exitGameOpen, setExitGameOpen] = useState(false);
 
   // Check if current route is NOT the home page
   const showReturnButton = location.pathname !== "/";
@@ -99,6 +101,23 @@ export const Header = () => {
     }
   };
 
+  /**
+   * Handles the header return button click.
+   * If the user is currently playing a quiz (/game/:slug but NOT /game/category/:category),
+   * opens a confirmation modal before navigating away. Otherwise navigates home directly.
+   */
+  const handleReturnClick = () => {
+    const isPlaying =
+      /^\/game\/[^/]+$/.test(location.pathname) &&
+      !location.pathname.startsWith("/game/category/");
+
+    if (isPlaying) {
+      setExitGameOpen(true);
+    } else {
+      navigate("/");
+    }
+  };
+
   return (
     <>
       <header className="app-header">
@@ -108,7 +127,7 @@ export const Header = () => {
             {showReturnButton && (
               <button
                 className="btn-return-now"
-                onClick={() => navigate("/")}
+                onClick={handleReturnClick}
                 title={t("notFound.returnNow", "Return Now")}
               >
                 <span className="card-arrow return-arrow">➔</span>
@@ -207,6 +226,10 @@ export const Header = () => {
       {/* Auth modals — mounted globally, opened via the auth pill */}
       <LoginModal isOpen={loginOpen} onClose={() => setLoginOpen(false)} />
       <LogoutModal isOpen={logoutOpen} onClose={() => setLogoutOpen(false)} />
+      <ExitGameModal
+        isOpen={exitGameOpen}
+        onClose={() => setExitGameOpen(false)}
+      />
     </>
   );
 };

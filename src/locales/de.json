@@ -141,5 +141,11 @@
     "hint": "Du kannst dich jederzeit wieder anmelden — deine Daten bleiben erhalten.",
     "confirm": "Abmelden",
     "cancel": "Bleiben"
+  },
+  "exitGame": {
+    "title": "Spiel verlassen?",
+    "hint": "Möchtest du das Spiel wirklich verlassen? Dein Fortschritt geht verloren.",
+    "confirm": "Ja",
+    "cancel": "Nein"
   }
 }
