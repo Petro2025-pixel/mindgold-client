@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import confetti from "canvas-confetti";
+import { useAuth } from "../../context/AuthContext";
+import { LoginModal } from "../Login/LoginModal";
 import "./GameScreen.css";
 
 const API_URL = "https://mindgold.top/api/v1";
@@ -20,6 +22,8 @@ export default function GameScreen() {
   const { slug } = useParams();
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { user } = useAuth();
+  const [loginOpen, setLoginOpen] = useState(true);
   const [quiz, setQuiz] = useState(null);
   const [questions, setQuestions] = useState([]);
   const [current, setCurrent] = useState(0);
@@ -33,11 +37,8 @@ export default function GameScreen() {
   const [error, setError] = useState(null);
   const [correctAnswerIdx, setCorrectAnswerIdx] = useState(null);
 
-  // Player Name State
-  const [playerName, setPlayerName] = useState(
-    () => localStorage.getItem("mg_player_name") || "",
-  );
-  const [gameStarted, setGameStarted] = useState(false);
+  // Player name comes from the authenticated user (no manual input).
+  const playerName = user?.name || "";
 
   const timerRef = useRef(null);
   const delayTimeoutRef = useRef(null);
@@ -81,6 +82,14 @@ export default function GameScreen() {
       .finally(() => setLoading(false));
   }, [slug]);
 
+  // Auto-open login modal when the user is not signed in
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    if (!user) {
+      setLoginOpen(true);
+    }
+  }, [user]);
+
   // Cleanup pending timeout on unmount (prevents setState on unmounted component)
   useEffect(() => {
     return () => {
@@ -91,13 +100,21 @@ export default function GameScreen() {
     };
   }, []);
 
+  const handleLoginClose = ({ success } = {}) => {
+    setLoginOpen(false);
+    if (!success) {
+      const category = quiz?.category;
+      navigate(category ? `/game/category/${category}` : "/game");
+    }
+  };
+
   // Save score to backend when game finishes
   useEffect(() => {
     if (!finished) return;
-    if (!playerName.trim()) return;
+    if (!playerName) return;
 
     const payload = {
-      playerName: playerName.trim(),
+      playerName,
       slug,
       score: correctCount,
       total: questions.length,
@@ -115,7 +132,7 @@ export default function GameScreen() {
   }, [finished]);
 
   useEffect(() => {
-    if (!gameStarted || finished || isAnswered || loading) return;
+    if (!user || finished || isAnswered || loading) return;
 
     setTimeLeft(QUESTION_TIMEOUT);
     timerRef.current = setInterval(() => {
@@ -130,7 +147,7 @@ export default function GameScreen() {
     }, 1000);
 
     return () => clearInterval(timerRef.current);
-  }, [current, isAnswered, finished, loading, gameStarted]);
+  }, [current, isAnswered, finished, loading, user]);
 
   // Small confetti for correct answer
   const triggerSmallConfetti = () => {
@@ -155,12 +172,6 @@ export default function GameScreen() {
     setIsAnswered(true);
     setWrongCount((w) => w + 1);
     nextQuestionWithDelay();
-  };
-  const handleStartGame = (e) => {
-    e.preventDefault();
-    if (!playerName.trim()) return;
-    localStorage.setItem("mg_player_name", playerName.trim());
-    setGameStarted(true);
   };
 
   const handleAnswer = async (index) => {
@@ -246,30 +257,14 @@ export default function GameScreen() {
       </div>
     );
 
-  // Step 1: Player Name Entry Screen
-  if (!gameStarted) {
+  // Step 1: Not signed in — show login modal instead of the game
+  if (!user) {
     return (
       <div className="game-page text-center">
         <h1 className="quiz-main-title">
           {quiz?.quizTitle || quiz?.title || t("game.defaultTitle")}
         </h1>
-        <div className="start-card">
-          <h3>{t("game.enterName")}</h3>
-          <form onSubmit={handleStartGame}>
-            <input
-              type="text"
-              className="player-input"
-              placeholder={t("game.playerNamePlaceholder")}
-              value={playerName}
-              onChange={(e) => setPlayerName(e.target.value)}
-              maxLength={20}
-              required
-            />
-            <button type="submit" className="btn-hex-game">
-              {t("game.startButton")}
-            </button>
-          </form>
-        </div>
+        <LoginModal isOpen={loginOpen} onClose={handleLoginClose} />
       </div>
     );
   }

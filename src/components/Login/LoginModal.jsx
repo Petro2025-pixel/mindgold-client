@@ -51,7 +51,7 @@ export function LoginModal({ isOpen, onClose }) {
     try {
       await login(name.trim(), password);
       resetForm();
-      onClose();
+      onClose({ success: true });
     } catch (err) {
       if (err.message === "INVALID_CREDENTIALS") {
         setError(t("auth.invalidCredentials"));
@@ -68,7 +68,7 @@ export function LoginModal({ isOpen, onClose }) {
    */
   const handleClose = () => {
     resetForm();
-    onClose();
+    onClose({ success: false });
   };
 
   return (
