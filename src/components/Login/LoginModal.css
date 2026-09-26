@@ -1,0 +1,37 @@
+/* Form layout — stacked inputs with consistent spacing */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+/* Text inputs styled for the dark MindGold theme */
+.login-input {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 1rem;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+}
+
+.login-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.login-input:focus {
+  border-color: #f1c40f;
+}
+
+/* Inline error text (wrong credentials / network) */
+.login-error {
+  margin: 0;
+  color: #ff6b81;
+  font-size: 0.9rem;
+  text-align: center;
+}

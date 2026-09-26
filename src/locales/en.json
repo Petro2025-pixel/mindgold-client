@@ -124,5 +124,22 @@
     "open": "Open",
     "loading": "Loading...",
     "error": "Failed to load categories"
+  },
+  "auth": {
+    "signIn": "Sign in",
+    "signedInAs": "Signed in as {{name}}",
+    "loginTitle": "Sign in",
+    "namePlaceholder": "Player name",
+    "passwordPlaceholder": "Password",
+    "submit": "Sign in",
+    "invalidCredentials": "Invalid name or password.",
+    "networkError": "Could not connect. Please try again."
+  },
+  "logout": {
+    "title": "Sign out?",
+    "player": "Player: {{name}}",
+    "hint": "You can sign back in anytime — your data stays safe.",
+    "confirm": "Sign out",
+    "cancel": "Stay"
   }
 }

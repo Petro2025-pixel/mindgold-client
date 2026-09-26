@@ -14,6 +14,7 @@ import GameScreen from "./components/Game/GameScreen";
 import QuizList from "./components/Game/QuizList";
 import CategoryList from "./components/CategoryList/CategoryList";
 import Leaderboard from "./components/Leaderboard/Leaderboard";
+import { AuthProvider } from "./context/AuthContext";
 import "./index.css";
 
 /**
@@ -67,34 +68,36 @@ export default function App() {
   const navigate = useNavigate();
 
   return (
-    <div className="app-container d-flex flex-column min-vh-100">
-      {/* Navigation Header with Language & Status Bar */}
-      <Header />
+    <AuthProvider>
+      <div className="app-container d-flex flex-column min-vh-100">
+        {/* Navigation Header with Language & Status Bar */}
+        <Header />
 
-      {/* Main Content Viewport */}
-      <main className="main-content flex-grow-1">
-        <Routes>
-          <Route
-            path="/"
-            element={<MainMenu onNavigate={(route) => navigate(route)} />}
-          />
-          <Route path="/diagnostics" element={<SystemDiagnostics />} />
-          {/* <Route path="/game" element={<GameScreen />} />
+        {/* Main Content Viewport */}
+        <main className="main-content flex-grow-1">
+          <Routes>
+            <Route
+              path="/"
+              element={<MainMenu onNavigate={(route) => navigate(route)} />}
+            />
+            <Route path="/diagnostics" element={<SystemDiagnostics />} />
+            {/* <Route path="/game" element={<GameScreen />} />
           <Route path="/game/:slug" element={<GameScreen />} /> */}
-          {/* <Route path="/editor" element={<EditorScreen />} /> */}
-          <Route path="/game" element={<CategoryList />} />
-          <Route path="/game/category/:category" element={<QuizList />} />
-          <Route path="/game/:slug" element={<GameScreen />} />
-          <Route path="/leaderboard" element={<Leaderboard />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-      </main>
+            {/* <Route path="/editor" element={<EditorScreen />} /> */}
+            <Route path="/game" element={<CategoryList />} />
+            <Route path="/game/category/:category" element={<QuizList />} />
+            <Route path="/game/:slug" element={<GameScreen />} />
+            <Route path="/leaderboard" element={<Leaderboard />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </main>
 
-      {/* Persistent Footer Component */}
-      <Footer />
+        {/* Persistent Footer Component */}
+        <Footer />
 
-      {/* GDPR Cookie Consent Notice */}
-      <CookieConsent />
-    </div>
+        {/* GDPR Cookie Consent Notice */}
+        <CookieConsent />
+      </div>
+    </AuthProvider>
   );
 }

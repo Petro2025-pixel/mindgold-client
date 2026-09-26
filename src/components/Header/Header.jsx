@@ -2,6 +2,9 @@ import React, { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useApiStatus } from "../../context/ApiStatusContext";
+import { useAuth } from "../../context/AuthContext";
+import { LoginModal } from "../Login/LoginModal";
+import { LogoutModal } from "../Logout/LogoutModal";
 import "./Header.css";
 
 /**
@@ -16,7 +19,14 @@ const LANGUAGES = [
 
 /**
  * Header Component
- * Sticky top navigation bar containing return button, language dropdown, and live API status indicator.
+ * Sticky top navigation bar containing:
+ *   - return button (visible outside home)
+ *   - language dropdown
+ *   - authentication pill (Sign in / username)
+ *   - live API status indicator
+ *
+ * Also owns the two auth modals (login + logout) so they can be opened
+ * from anywhere in the app via the pill.
  *
  * @component
  * @returns {React.ReactElement} The rendered Header navigation bar.
@@ -26,10 +36,15 @@ export const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { status: apiStatus } = useApiStatus();
+  const { user } = useAuth();
 
   // Language dropdown state
   const [isLangOpen, setIsLangOpen] = useState(false);
   const langDropdownRef = useRef(null);
+
+  // Auth modals state
+  const [loginOpen, setLoginOpen] = useState(false);
+  const [logoutOpen, setLogoutOpen] = useState(false);
 
   // Check if current route is NOT the home page
   const showReturnButton = location.pathname !== "/";
@@ -73,94 +88,125 @@ export const Header = () => {
     setIsLangOpen(false);
   };
 
+  /**
+   * Opens the login or logout modal depending on current auth state.
+   */
+  const handleAuthClick = () => {
+    if (user) {
+      setLogoutOpen(true);
+    } else {
+      setLoginOpen(true);
+    }
+  };
+
   return (
-    <header className="app-header">
-      <div className="header-container">
-        {/* Left section: Navigation back button & Language dropdown */}
-        <div className="header-left">
-          {showReturnButton && (
-            <button
-              className="btn-return-now"
-              onClick={() => navigate("/")}
-              title={t("notFound.returnNow", "Return Now")}
-            >
-              <span className="card-arrow return-arrow">➔</span>
-              <span className="btn-text">
-                {t("notFound.returnNow", "Return Now")}
-              </span>
-            </button>
-          )}
-
-          {/* Language dropdown */}
-          <div className="lang-dropdown" ref={langDropdownRef}>
-            <button
-              className={`lang-btn lang-btn--trigger ${
-                isLangOpen ? "open" : ""
-              }`}
-              onClick={() => setIsLangOpen((v) => !v)}
-              title={t("header.changeLanguage", "Change language")}
-              aria-haspopup="true"
-              aria-expanded={isLangOpen}
-            >
-              <span className="lang-flag">
-                {LANGUAGES.find(
-                  (l) => l.code === (i18n.resolvedLanguage || i18n.language),
-                )?.flag || "🌐"}
-              </span>
-              <span className="lang-code">
-                {(i18n.resolvedLanguage || i18n.language).toUpperCase()}
-              </span>
-              <span className="lang-caret">▼</span>
-            </button>
-
-            {isLangOpen && (
-              <div className="lang-dropdown-menu" role="menu">
-                {LANGUAGES.map((lang) => (
-                  <button
-                    key={lang.code}
-                    className={`lang-dropdown-item ${
-                      (i18n.resolvedLanguage || i18n.language) === lang.code
-                        ? "active"
-                        : ""
-                    }`}
-                    onClick={() => handleSelectLanguage(lang.code)}
-                    role="menuitem"
-                  >
-                    <span className="lang-flag">{lang.flag}</span>
-                    <span className="lang-code">{lang.label}</span>
-                    {(i18n.resolvedLanguage || i18n.language) === lang.code && (
-                      <span className="lang-check">✓</span>
-                    )}
-                  </button>
-                ))}
-              </div>
+    <>
+      <header className="app-header">
+        <div className="header-container">
+          {/* Left section: Navigation back button & Language dropdown */}
+          <div className="header-left">
+            {showReturnButton && (
+              <button
+                className="btn-return-now"
+                onClick={() => navigate("/")}
+                title={t("notFound.returnNow", "Return Now")}
+              >
+                <span className="card-arrow return-arrow">➔</span>
+                <span className="btn-text">
+                  {t("notFound.returnNow", "Return Now")}
+                </span>
+              </button>
             )}
-          </div>
-        </div>
 
-        {/* Right section: System operational status indicator */}
-        <div className="header-right">
-          <div
-            className={`live-status status-${apiStatus}`}
-            title={
-              apiStatus === "checking"
-                ? t("header.statusChecking", "API CHECKING...")
-                : apiStatus === "ok"
-                  ? t("header.statusOk", "API OK")
-                  : t("header.statusError", "API OFFLINE")
-            }
-          >
-            <span className="status-label">API</span>
-            <span className="status-text">
-              {apiStatus === "checking" &&
-                t("header.statusCheckingShort", "CHECKING...")}
-              {apiStatus === "ok" && t("header.statusOkShort", "OK")}
-              {apiStatus === "error" && t("header.statusErrorShort", "OFFLINE")}
-            </span>
-            <span className="status-dot"></span>
+            {/* Language dropdown */}
+            <div className="lang-dropdown" ref={langDropdownRef}>
+              <button
+                className={`lang-btn lang-btn--trigger ${
+                  isLangOpen ? "open" : ""
+                }`}
+                onClick={() => setIsLangOpen((v) => !v)}
+                title={t("header.changeLanguage", "Change language")}
+                aria-haspopup="true"
+                aria-expanded={isLangOpen}
+              >
+                <span className="lang-flag">
+                  {LANGUAGES.find(
+                    (l) => l.code === (i18n.resolvedLanguage || i18n.language),
+                  )?.flag || "🌐"}
+                </span>
+                <span className="lang-code">
+                  {(i18n.resolvedLanguage || i18n.language).toUpperCase()}
+                </span>
+                <span className="lang-caret">▼</span>
+              </button>
+
+              {isLangOpen && (
+                <div className="lang-dropdown-menu" role="menu">
+                  {LANGUAGES.map((lang) => (
+                    <button
+                      key={lang.code}
+                      className={`lang-dropdown-item ${
+                        (i18n.resolvedLanguage || i18n.language) === lang.code
+                          ? "active"
+                          : ""
+                      }`}
+                      onClick={() => handleSelectLanguage(lang.code)}
+                      role="menuitem"
+                    >
+                      <span className="lang-flag">{lang.flag}</span>
+                      <span className="lang-code">{lang.label}</span>
+                      {(i18n.resolvedLanguage || i18n.language) ===
+                        lang.code && <span className="lang-check">✓</span>}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Right section: Auth pill + System operational status indicator */}
+          <div className="header-right">
+            {/* Authentication pill: "Sign in" or username */}
+            <button
+              className={`auth-pill ${user ? "auth-pill--user" : "auth-pill--login"}`}
+              onClick={handleAuthClick}
+              title={
+                user
+                  ? t("auth.signedInAs", { name: user.name })
+                  : t("auth.signIn")
+              }
+            >
+              {user ? user.name : t("auth.signIn")}
+            </button>
+
+            {/* API status indicator */}
+            <div
+              className={`live-status status-${apiStatus}`}
+              title={
+                apiStatus === "checking"
+                  ? t("header.statusChecking", "API CHECKING...")
+                  : apiStatus === "ok"
+                    ? t("header.statusOk", "API OK")
+                    : t("header.statusError", "API OFFLINE")
+              }
+            >
+              <span className="status-label">API</span>
+              <span className="status-text">
+                {apiStatus === "checking" &&
+                  t("header.statusCheckingShort", "CHECKING...")}
+                {apiStatus === "ok" && t("header.statusOkShort", "OK")}
+                {apiStatus === "error" &&
+                  t("header.statusErrorShort", "OFFLINE")}
+              </span>
+              <span className="status-dot"></span>
+            </div>
           </div>
         </div>
-      </div>
-    </header>
+      </header>
+
+      {/* Auth modals — mounted globally, opened via the auth pill */}
+      <LoginModal isOpen={loginOpen} onClose={() => setLoginOpen(false)} />
+      <LogoutModal isOpen={logoutOpen} onClose={() => setLogoutOpen(false)} />
+    </>
   );
 };

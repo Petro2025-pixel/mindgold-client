@@ -124,5 +124,22 @@
     "open": "Öffnen",
     "loading": "Wird geladen...",
     "error": "Kategorien konnten nicht geladen werden"
+  },
+  "auth": {
+    "signIn": "Anmelden",
+    "signedInAs": "Angemeldet als {{name}}",
+    "loginTitle": "Anmelden",
+    "namePlaceholder": "Spielername",
+    "passwordPlaceholder": "Passwort",
+    "submit": "Anmelden",
+    "invalidCredentials": "Ungültiger Name oder Passwort.",
+    "networkError": "Verbindung fehlgeschlagen. Bitte erneut versuchen."
+  },
+  "logout": {
+    "title": "Abmelden?",
+    "player": "Spieler: {{name}}",
+    "hint": "Du kannst dich jederzeit wieder anmelden — deine Daten bleiben erhalten.",
+    "confirm": "Abmelden",
+    "cancel": "Bleiben"
   }
 }
