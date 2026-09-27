@@ -203,5 +203,82 @@
       "title": "Test Mode",
       "text": "MindGold is currently in test mode. Some features may be unstable or unavailable, and data may be reset without warning. We apologize for any inconvenience."
     }
+  },
+  "editor": {
+    "title": "Quiz Lab",
+    "subtitle": "Create a quiz manually or import ready-made JSON from AI",
+
+    "tabs": {
+      "manual": "Manual",
+      "import": "Import JSON"
+    },
+
+    "quizTitle": "Quiz title",
+    "quizTitlePlaceholder": "e.g. Rektion der Verben",
+    "category": "Category",
+    "categoryLoading": "Loading categories…",
+    "categoryPlaceholder": "e.g. deutsch-b1",
+    "categoryHint": "Pick an existing one or type a new slug (lowercase, hyphens).",
+
+    "questions": "Questions ({{count}})",
+    "questionNumber": "Question {{n}}",
+    "questionText": "Question",
+    "questionPlaceholder": "e.g. Was ist die Hauptstadt von Österreich?",
+    "removeQuestion": "Remove question",
+    "remove": "Remove",
+    "addQuestion": "Add question",
+    "save": "Save quiz",
+    "saving": "Saving…",
+    "optional": "optional",
+
+    "hint": "Hint / explanation",
+    "hintPlaceholder": "1–3 sentences explaining why the answer is correct (used in CheatSheet)",
+
+    "answers": "Answers",
+    "markCorrect": "mark the correct one",
+    "markAsCorrect": "Mark as correct",
+    "answerPlaceholder": "Answer option",
+
+    "import": {
+      "tabText": "Text / Topic",
+      "tabScreenshot": "From screenshot",
+      "visionHint": "Use a vision-capable model: ChatGPT-4o, Gemini, or Claude 3.5+.",
+      "step1": "Step 1 — Copy the prompt",
+      "step2": "Step 2 — Paste the JSON",
+      "step3": "Step 3 — Category & upload",
+      "promptLanguage": "Quiz language",
+      "topic": "Topic",
+      "topicPlaceholder": "e.g. C# GUI basics",
+      "questionCount": "Questions",
+      "rangeHint": "1–70",
+      "prefix": "ID prefix",
+      "level": "Level",
+      "level_basic": "Basic",
+      "level_intermediate": "Intermediate",
+      "level_advanced": "Advanced",
+      "largeQuizWarning": "Large quizzes (40+) may be cut off by AI. If so, generate in chunks of 20 and merge.",
+      "copyPrompt": "Copy prompt",
+      "copied": "Copied!",
+      "copyFailed": "Copy failed — select manually",
+      "jsonPlaceholder": "Paste the quiz JSON here, e.g. { \"quizTitle\": \"...\", \"questions\": [...] }",
+      "validate": "Validate",
+      "clear": "Clear",
+      "validateFirst": "Please validate first",
+      "selectCategory": "Please select a category",
+      "validOk": "Valid",
+      "upload": "Upload to server"
+    },
+
+    "limitModal": {
+      "title": "Test Mode",
+      "text": "You can create up to 3 quizzes per day during the test phase.",
+      "retryIn": "Try again in"
+    },
+
+    "errors": {
+      "server": "Server error. Please try again.",
+      "network": "Network error. Check your connection.",
+      "validationTitle": "Validation errors"
+    }
   }
 }

@@ -206,5 +206,82 @@
       "title": "Тестовий режим",
       "text": "MindGold наразі перебуває в тестовому режимі. Деякі функції можуть бути нестабільними або недоступними, а дані можуть бути скинуті без попередження. Перепрошуємо за можливі незручності."
     }
+  },
+  "editor": {
+    "title": "Quiz Lab",
+    "subtitle": "Створи квіз вручну або імпортуй готовий JSON зі ШІ",
+
+    "tabs": {
+      "manual": "Вручну",
+      "import": "Імпорт JSON"
+    },
+
+    "quizTitle": "Назва квіза",
+    "quizTitlePlaceholder": "напр. Rektion der Verben",
+    "category": "Категорія",
+    "categoryLoading": "Завантаження категорій…",
+    "categoryPlaceholder": "напр. deutsch-b1",
+    "categoryHint": "Обери існуючу або введи новий slug (малими літерами, дефіси).",
+
+    "questions": "Питання ({{count}})",
+    "questionNumber": "Питання {{n}}",
+    "questionText": "Питання",
+    "questionPlaceholder": "напр. Was ist die Hauptstadt von Österreich?",
+    "removeQuestion": "Видалити питання",
+    "remove": "Видалити",
+    "addQuestion": "Додати питання",
+    "save": "Зберегти квіз",
+    "saving": "Збереження…",
+    "optional": "необов'язково",
+
+    "hint": "Підказка / пояснення",
+    "hintPlaceholder": "1–3 речення, чому відповідь правильна (використовується в CheatSheet)",
+
+    "answers": "Відповіді",
+    "markCorrect": "познач правильну",
+    "markAsCorrect": "Позначити як правильну",
+    "answerPlaceholder": "Варіант відповіді",
+
+    "import": {
+      "tabText": "Текст / Тема",
+      "tabScreenshot": "Зі скриншота",
+      "visionHint": "Використовуй модель із підтримкою зору: ChatGPT-4o, Gemini або Claude 3.5+.",
+      "step1": "Крок 1 — Скопіюй промпт",
+      "step2": "Крок 2 — Встав JSON",
+      "step3": "Крок 3 — Категорія та завантаження",
+      "promptLanguage": "Мова квіза",
+      "topic": "Тема",
+      "topicPlaceholder": "напр. C# GUI основи",
+      "questionCount": "Питань",
+      "rangeHint": "1–70",
+      "prefix": "Префікс ID",
+      "level": "Рівень",
+      "level_basic": "Базовий",
+      "level_intermediate": "Середній",
+      "level_advanced": "Просунутий",
+      "largeQuizWarning": "Великі квізи (40+) можуть бути обрізані ШІ. Якщо так — генеруй частинами по 20 і об'єднуй.",
+      "copyPrompt": "Копіювати промпт",
+      "copied": "Скопійовано!",
+      "copyFailed": "Не вдалося скопіювати — виділи вручну",
+      "jsonPlaceholder": "Встав сюди JSON квіза, напр. { \"quizTitle\": \"...\", \"questions\": [...] }",
+      "validate": "Перевірити",
+      "clear": "Очистити",
+      "validateFirst": "Спочатку перевір",
+      "selectCategory": "Обери категорію",
+      "validOk": "Валідний",
+      "upload": "Завантажити на сервер"
+    },
+
+    "limitModal": {
+      "title": "Тестовий режим",
+      "text": "Під час тестування можна створити до 3 квізів на день.",
+      "retryIn": "Спробувати знову через"
+    },
+
+    "errors": {
+      "server": "Помилка сервера. Спробуй ще раз.",
+      "network": "Помилка мережі. Перевір з'єднання.",
+      "validationTitle": "Помилки валідації"
+    }
   }
 }

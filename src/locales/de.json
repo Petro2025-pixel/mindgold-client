@@ -203,5 +203,82 @@
       "title": "Testmodus",
       "text": "MindGold befindet sich derzeit im Testmodus. Einige Funktionen können instabil oder nicht verfügbar sein, und Daten können ohne Vorwarnung zurückgesetzt werden. Wir entschuldigen uns für etwaige Unannehmlichkeiten."
     }
+  },
+  "editor": {
+    "title": "Quiz Lab",
+    "subtitle": "Erstelle ein Quiz manuell oder importiere fertiges JSON aus der KI",
+
+    "tabs": {
+      "manual": "Manuell",
+      "import": "JSON importieren"
+    },
+
+    "quizTitle": "Titel des Quiz",
+    "quizTitlePlaceholder": "z.B. Rektion der Verben",
+    "category": "Kategorie",
+    "categoryLoading": "Kategorien werden geladen…",
+    "categoryPlaceholder": "z.B. deutsch-b1",
+    "categoryHint": "Wähle eine bestehende oder gib einen neuen Slug ein (klein, Bindestriche).",
+
+    "questions": "Fragen ({{count}})",
+    "questionNumber": "Frage {{n}}",
+    "questionText": "Frage",
+    "questionPlaceholder": "z.B. Was ist die Hauptstadt von Österreich?",
+    "removeQuestion": "Frage entfernen",
+    "remove": "Entfernen",
+    "addQuestion": "Frage hinzufügen",
+    "save": "Quiz speichern",
+    "saving": "Wird gespeichert…",
+    "optional": "optional",
+
+    "hint": "Hinweis / Erklärung",
+    "hintPlaceholder": "1–3 Sätze, warum die Antwort richtig ist (wird im CheatSheet verwendet)",
+
+    "answers": "Antworten",
+    "markCorrect": "markiere die richtige",
+    "markAsCorrect": "Als richtig markieren",
+    "answerPlaceholder": "Antwortoption",
+
+    "import": {
+      "tabText": "Text / Thema",
+      "tabScreenshot": "Aus Screenshot",
+      "visionHint": "Verwende ein Vision-fähiges Modell: ChatGPT-4o, Gemini oder Claude 3.5+.",
+      "step1": "Schritt 1 — Prompt kopieren",
+      "step2": "Schritt 2 — JSON einfügen",
+      "step3": "Schritt 3 — Kategorie & hochladen",
+      "promptLanguage": "Quiz-Sprache",
+      "topic": "Thema",
+      "topicPlaceholder": "z.B. C# GUI Grundlagen",
+      "questionCount": "Fragen",
+      "rangeHint": "1–70",
+      "prefix": "ID-Präfix",
+      "level": "Niveau",
+      "level_basic": "Grundlagen",
+      "level_intermediate": "Mittelstufe",
+      "level_advanced": "Fortgeschritten",
+      "largeQuizWarning": "Große Quizze (40+) können von der KI abgeschnitten werden. Falls ja: in Blöcken von 20 generieren und zusammenführen.",
+      "copyPrompt": "Prompt kopieren",
+      "copied": "Kopiert!",
+      "copyFailed": "Kopieren fehlgeschlagen — manuell auswählen",
+      "jsonPlaceholder": "Füge hier das Quiz-JSON ein, z.B. { \"quizTitle\": \"...\", \"questions\": [...] }",
+      "validate": "Prüfen",
+      "clear": "Leeren",
+      "validateFirst": "Bitte zuerst prüfen",
+      "selectCategory": "Bitte eine Kategorie auswählen",
+      "validOk": "Gültig",
+      "upload": "Auf Server hochladen"
+    },
+
+    "limitModal": {
+      "title": "Testmodus",
+      "text": "Während der Testphase kannst du bis zu 3 Quizze pro Tag erstellen.",
+      "retryIn": "Erneut versuchen in"
+    },
+
+    "errors": {
+      "server": "Serverfehler. Bitte erneut versuchen.",
+      "network": "Netzwerkfehler. Verbindung prüfen.",
+      "validationTitle": "Validierungsfehler"
+    }
   }
 }

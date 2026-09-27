@@ -15,6 +15,7 @@ import QuizList from "./components/Game/QuizList";
 import CategoryList from "./components/CategoryList/CategoryList";
 import Leaderboard from "./components/Leaderboard/Leaderboard";
 import AboutPage from "./components/About/AboutPage";
+import EditorPage from "./components/Editor/EditorPage";
 import { AuthProvider } from "./context/AuthContext";
 import "./index.css";
 
@@ -82,14 +83,12 @@ export default function App() {
               element={<MainMenu onNavigate={(route) => navigate(route)} />}
             />
             <Route path="/diagnostics" element={<SystemDiagnostics />} />
-            {/* <Route path="/game" element={<GameScreen />} />
-          <Route path="/game/:slug" element={<GameScreen />} /> */}
-            {/* <Route path="/editor" element={<EditorScreen />} /> */}
             <Route path="/game" element={<CategoryList />} />
             <Route path="/game/category/:category" element={<QuizList />} />
             <Route path="/game/:slug" element={<GameScreen />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
             <Route path="/about" element={<AboutPage />} />
+            <Route path="/editor" element={<EditorPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </main>
