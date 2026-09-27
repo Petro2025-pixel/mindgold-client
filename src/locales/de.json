@@ -147,5 +147,61 @@
     "hint": "Möchtest du das Spiel wirklich verlassen? Dein Fortschritt geht verloren.",
     "confirm": "Ja",
     "cancel": "Nein"
+  },
+  "about": {
+    "title": "Über MindGold",
+    "subtitle": "Interaktive Quiz- und Wissensengine",
+
+    "what": {
+      "title": "Was ist MindGold?",
+      "text": "MindGold ist eine selbst gehostete Lernplattform, die drei Modi vereint: Lernen, Spielen und Erstellen. Ob du eine Sprache, eine Programmiersprache oder ein anderes Thema lernst — MindGold passt sich deinen Bedürfnissen an."
+    },
+
+    "modes": {
+      "title": "Drei Lernmodi",
+      "cheatsheet": {
+        "title": "CheatSheet — Lernen",
+        "text": "Lies strukturierte Fragen, richtige Antworten und Erklärungen. Perfekt zum tiefen Verständnis und zur Wiederholung."
+      },
+      "game": {
+        "title": "Game Arena — Testen",
+        "text": "Spiele Quizze gegen die Uhr. Erhalte sofortiges Feedback, sammle Punkte und klettere in der Rangliste nach oben."
+      },
+      "editor": {
+        "title": "Quiz Lab — Erstellen",
+        "text": "Erstelle deine eigenen Quizze manuell oder generiere sie mit KI (ChatGPT, Claude, Gemini). Importiere fertiges JSON in Sekunden."
+      }
+    },
+
+    "how": {
+      "title": "Wie man es benutzt",
+      "step1": "Erstelle ein Quiz im Quiz Lab — manuell oder mit KI-Unterstützung.",
+      "step2": "Lerne es im CheatSheet — lies Fragen, Antworten und Erklärungen.",
+      "step3": "Spiele es in der Game Arena — teste dein Wissen gegen die Uhr.",
+      "step4": "Wiederhole den Zyklus — vertiefe dein Verständnis mit der Zeit."
+    },
+
+    "languages": {
+      "title": "Jedes Thema, jede Sprache",
+      "programming": "Programmierung: C#, Python, JavaScript, SQL, ...",
+      "languages": "Sprachen: Deutsch B1, Englisch C1, Ukrainisch, ...",
+      "academic": "Wissenschaft: Geschichte, Geografie, Biologie, Mathe, ...",
+      "professional": "Beruflich: Projektmanagement, Marketing, Finanzen, ...",
+      "note": "Die Oberfläche ist in EN / DE / UK verfügbar. Quiz-Inhalte können in jeder Sprache sein — gib sie einfach im KI-Prompt an (z.B. \"Language: Spanish\"). Die Prompt-Vorlagen unterstützen standardmäßig EN / DE / UK."
+    },
+
+    "why": {
+      "title": "Warum MindGold?",
+      "feature1": "✅ KI-gestützte Erstellung — Quizze in Sekunden generieren.",
+      "feature2": "✅ Strukturiertes Lernen — nach Themen und Tags organisiert.",
+      "feature3": "✅ Fortschrittsverfolgung — Verbesserung über Zeit sehen.",
+      "feature4": "✅ Selbst gehostet — deine Daten, deine Regeln.",
+      "feature5": "✅ Mehrsprachig — Oberfläche verfügbar in EN / DE / UK."
+    },
+
+    "testMode": {
+      "title": "Testmodus",
+      "text": "MindGold befindet sich derzeit im Testmodus. Einige Funktionen können instabil oder nicht verfügbar sein, und Daten können ohne Vorwarnung zurückgesetzt werden. Wir entschuldigen uns für etwaige Unannehmlichkeiten."
+    }
   }
 }

@@ -147,5 +147,61 @@
     "hint": "Are you sure you want to leave? Your progress will be lost.",
     "confirm": "Yes",
     "cancel": "No"
+  },
+  "about": {
+    "title": "About MindGold",
+    "subtitle": "Interactive Quiz and Knowledge Engine",
+
+    "what": {
+      "title": "What is MindGold?",
+      "text": "MindGold is a self-hosted learning platform that combines three modes: study, play, and create. Whether you're learning a language, a programming language, or any other subject — MindGold adapts to your needs."
+    },
+
+    "modes": {
+      "title": "Three Learning Modes",
+      "cheatsheet": {
+        "title": "CheatSheet — Learn",
+        "text": "Read through structured questions, correct answers, and explanations. Perfect for deep understanding and revision."
+      },
+      "game": {
+        "title": "Game Arena — Test",
+        "text": "Play quizzes against the clock. Get instant feedback, earn points, and climb the leaderboard."
+      },
+      "editor": {
+        "title": "Quiz Lab — Create",
+        "text": "Build your own quizzes manually or generate them with AI (ChatGPT, Claude, Gemini). Import ready-made JSON in seconds."
+      }
+    },
+
+    "how": {
+      "title": "How to Use",
+      "step1": "Create a quiz in Quiz Lab — manually or with AI assistance.",
+      "step2": "Study it in CheatSheet — read the questions, answers, and explanations.",
+      "step3": "Play it in Game Arena — test your knowledge against the clock.",
+      "step4": "Repeat the cycle — deepen your understanding over time."
+    },
+
+    "languages": {
+      "title": "Any Subject, Any Language",
+      "programming": "Programming: C#, Python, JavaScript, SQL, ...",
+      "languages": "Languages: German B1, English C1, Ukrainian, ...",
+      "academic": "Academic: History, Geography, Biology, Math, ...",
+      "professional": "Professional: Project Management, Marketing, Finance, ...",
+      "note": "The interface is available in EN / DE / UK. Quiz content can be in any language — just specify it in the AI prompt (e.g. \"Language: Spanish\"). The prompt templates support EN / DE / UK by default."
+    },
+
+    "why": {
+      "title": "Why MindGold?",
+      "feature1": "✅ AI-powered creation — generate quizzes in seconds.",
+      "feature2": "✅ Structured learning — organized by topics and tags.",
+      "feature3": "✅ Progress tracking — see your improvement over time.",
+      "feature4": "✅ Self-hosted — your data, your rules.",
+      "feature5": "✅ Multi-language — interface available in EN / DE / UK."
+    },
+
+    "testMode": {
+      "title": "Test Mode",
+      "text": "MindGold is currently in test mode. Some features may be unstable or unavailable, and data may be reset without warning. We apologize for any inconvenience."
+    }
   }
 }
