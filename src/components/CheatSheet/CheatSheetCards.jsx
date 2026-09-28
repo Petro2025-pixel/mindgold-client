@@ -18,11 +18,12 @@ const ANSWER_PREFIXES = ["A", "B", "C", "D"];
  * @param {object} props
  * @param {Array<object>} props.questions - Array of questions with
  *   { id, question, answers, correct, hint }.
+ * @param {number} props.currentIndex - Current card index (controlled by parent).
+ * @param {(index: number) => void} props.setCurrentIndex - Setter for the index.
  * @returns {JSX.Element}
  */
-export function CheatSheetCards({ questions }) {
+export function CheatSheetCards({ questions, currentIndex, setCurrentIndex }) {
   const { t } = useTranslation();
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [flipped, setFlipped] = useState(false);
 
   if (!questions || questions.length === 0) {

@@ -49,6 +49,7 @@ export default function CheatSheetQuiz() {
   const [error, setError] = useState(null);
   const [showTop, setShowTop] = useState(false);
   const [mode, setMode] = useState("reading");
+  const [cardIndex, setCardIndex] = useState(0);
 
   // Fetch cheat sheet content
   useEffect(() => {
@@ -179,7 +180,11 @@ export default function CheatSheetQuiz() {
           })}
         </div>
       ) : (
-        <CheatSheetCards questions={quiz.questions} />
+        <CheatSheetCards
+          questions={quiz.questions}
+          currentIndex={cardIndex}
+          setCurrentIndex={setCardIndex}
+        />
       )}
 
       {showTop && (

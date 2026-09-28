@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import confetti from "canvas-confetti";
 import { useAuth } from "../../context/AuthContext";
+import { apiFetch } from "../../api/client";
 import { LoginModal } from "../Login/LoginModal";
 import "./GameScreen.css";
 
@@ -50,27 +51,31 @@ export default function GameScreen() {
       delayTimeoutRef.current = null;
     }
     setLoading(true);
-    fetch(`${API_URL}/quizzes/${slug}`)
+
+    // Use /cheatsheet/:slug — it includes `correct` (needed for green highlight).
+    // /quizzes/:slug strips `correct` on the backend to prevent cheating.
+    apiFetch(`/cheatsheet/${slug}`)
       .then((res) => {
         if (!res.ok) throw new Error(`Quiz not found (${res.status})`);
         return res.json();
       })
       .then((data) => {
-        const quizData = data.data || data.quiz || data;
+        const quizData = data.quiz || data;
         if (!quizData?.questions) throw new Error("Invalid data format");
 
         const shuffledQuestions = shuffleArray([...quizData.questions]);
 
         const prepared = shuffledQuestions.map((q) => {
-          const shuffledAnswers = shuffleArray([...q.answers]);
-
-          const correctText = q.answers[q.correct];
-
-          const newCorrectIndex = shuffledAnswers.indexOf(correctText);
+          // Track original index alongside text — safe against duplicate texts
+          const pairs = q.answers.map((text, origIdx) => ({ text, origIdx }));
+          const shuffledPairs = shuffleArray(pairs);
+          const newCorrectIndex = shuffledPairs.findIndex(
+            (p) => p.origIdx === q.correct,
+          );
 
           return {
             ...q,
-            answers: shuffledAnswers,
+            answers: shuffledPairs.map((p) => p.text),
             correct: newCorrectIndex,
           };
         });
@@ -214,7 +219,7 @@ export default function GameScreen() {
         triggerSmallConfetti();
       } else {
         setWrongCount((w) => w + 1);
-        // Highlight the correct answer locally (server no longer returns it)
+        // Highlight the correct answer locally
         setCorrectAnswerIdx(currentQuestion.correct);
       }
     } catch (err) {
