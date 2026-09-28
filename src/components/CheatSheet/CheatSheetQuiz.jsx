@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { apiFetch } from "../../api/client";
 import { Breadcrumb } from "../Breadcrumb/Breadcrumb";
+import { CheatSheetCards } from "./CheatSheetCards";
 import "./CheatSheet.css";
 
 /**
@@ -47,6 +48,7 @@ export default function CheatSheetQuiz() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showTop, setShowTop] = useState(false);
+  const [mode, setMode] = useState("reading");
 
   // Fetch cheat sheet content
   useEffect(() => {
@@ -128,34 +130,57 @@ export default function CheatSheetQuiz() {
         </p>
       </header>
 
-      <div className="cheatsheet-list">
-        {quiz.questions.map((q, index) => {
-          const correctText = q.answers[q.correct];
-          const correctLetter = ANSWER_PREFIXES[q.correct];
-
-          return (
-            <article key={q.id || index} className="cheatsheet-question">
-              <div className="cheatsheet-q-number">Q{index + 1}</div>
-              <h3 className="cheatsheet-q-text">{q.question}</h3>
-              <p className="cheatsheet-q-answer">
-                <span className="cheatsheet-q-check">✅</span>{" "}
-                <span className="cheatsheet-q-letter">{correctLetter})</span>{" "}
-                {correctText}
-              </p>
-              {q.hint ? (
-                <p className="cheatsheet-q-hint">
-                  <span className="cheatsheet-q-bulb">💡</span> {q.hint}
-                </p>
-              ) : (
-                <p className="cheatsheet-q-hint cheatsheet-q-hint--empty">
-                  <span className="cheatsheet-q-bulb">💡</span>{" "}
-                  {t("cheatsheet.noHint", "Explanation not available")}
-                </p>
-              )}
-            </article>
-          );
-        })}
+      {/* Mode toggle */}
+      <div className="cheatsheet-modes">
+        <button
+          type="button"
+          className={`cheatsheet-mode-btn ${mode === "reading" ? "active" : ""}`}
+          onClick={() => setMode("reading")}
+        >
+          📖 {t("cheatsheet.modeReading", "Reading")}
+        </button>
+        <button
+          type="button"
+          className={`cheatsheet-mode-btn ${mode === "cards" ? "active" : ""}`}
+          onClick={() => setMode("cards")}
+        >
+          🃏 {t("cheatsheet.modeCards", "Cards")}
+        </button>
       </div>
+
+      {/* Content */}
+      {mode === "reading" ? (
+        <div className="cheatsheet-list">
+          {quiz.questions.map((q, index) => {
+            const correctText = q.answers[q.correct];
+            const correctLetter = ANSWER_PREFIXES[q.correct];
+
+            return (
+              <article key={q.id || index} className="cheatsheet-question">
+                <div className="cheatsheet-q-number">Q{index + 1}</div>
+                <h3 className="cheatsheet-q-text">{q.question}</h3>
+                <p className="cheatsheet-q-answer">
+                  <span className="cheatsheet-q-check">✅</span>{" "}
+                  <span className="cheatsheet-q-letter">{correctLetter})</span>{" "}
+                  {correctText}
+                </p>
+                {q.hint ? (
+                  <p className="cheatsheet-q-hint">
+                    <span className="cheatsheet-q-bulb">💡</span> {q.hint}
+                  </p>
+                ) : (
+                  <p className="cheatsheet-q-hint cheatsheet-q-hint--empty">
+                    <span className="cheatsheet-q-bulb">💡</span>{" "}
+                    {t("cheatsheet.noHint", "Explanation not available")}
+                  </p>
+                )}
+              </article>
+            );
+          })}
+        </div>
+      ) : (
+        <CheatSheetCards questions={quiz.questions} />
+      )}
 
       {showTop && (
         <button

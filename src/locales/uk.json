@@ -296,6 +296,15 @@
     "study": "Вивчати",
     "open": "Вивчати",
     "noHint": "Пояснення недоступне",
-    "backToTop": "Вгору"
+    "backToTop": "Вгору",
+
+    "modeReading": "Читати",
+    "modeCards": "Картки",
+    "cardProgress": "Картка {{current}} / {{total}}",
+    "showAnswer": "Показати відповідь",
+    "showQuestion": "Показати питання",
+    "answer": "Відповідь",
+    "prev": "Назад",
+    "next": "Наступна"
   }
 }

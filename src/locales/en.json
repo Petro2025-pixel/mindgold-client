@@ -293,6 +293,15 @@
     "study": "Study",
     "open": "Study",
     "noHint": "Explanation not available",
-    "backToTop": "Back to top"
+    "backToTop": "Back to top",
+
+    "modeReading": "Reading",
+    "modeCards": "Cards",
+    "cardProgress": "Card {{current}} / {{total}}",
+    "showAnswer": "Show answer",
+    "showQuestion": "Show question",
+    "answer": "Answer",
+    "prev": "Previous",
+    "next": "Next"
   }
 }

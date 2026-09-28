@@ -274,3 +274,271 @@
     font-size: 1rem;
   }
 }
+
+/* =========================================================
+   CheatSheet — mode toggle (Reading / Cards)
+   ========================================================= */
+
+.cheatsheet-modes {
+  display: flex;
+  gap: 8px;
+  margin: 8px 0 24px;
+}
+
+.cheatsheet-mode-btn {
+  background: rgba(15, 23, 42, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #a8a8bc;
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.cheatsheet-mode-btn:hover {
+  border-color: rgba(241, 196, 15, 0.4);
+  color: #e0e0ec;
+}
+
+.cheatsheet-mode-btn.active {
+  background: rgba(241, 196, 15, 0.12);
+  border-color: #f1c40f;
+  color: #f1c40f;
+}
+
+/* =========================================================
+   Cards mode — flip card
+   ========================================================= */
+
+.cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.cards-progress {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #8a8da0;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  letter-spacing: 0.5px;
+}
+
+/* Outer wrapper — sets the 3D perspective */
+.cards-card-wrapper {
+  perspective: 1200px;
+  min-height: 340px;
+}
+
+/* Inner — rotates on Y axis when --flipped is applied */
+.cards-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 340px;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.cards-card-wrapper--flipped .cards-card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Shared face styles */
+.cards-card {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(241, 196, 15, 0.3);
+  border-radius: 18px;
+  padding: 28px 32px;
+  display: flex;
+  flex-direction: column;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+}
+
+/* Front face — question */
+.cards-card--front {
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}
+
+/* Back face — answer */
+.cards-card--back {
+  transform: rotateY(180deg);
+  justify-content: flex-start;
+  gap: 12px;
+}
+
+/* Number */
+.cards-q-number {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #f1c40f;
+  letter-spacing: 0.5px;
+  align-self: flex-start;
+}
+
+/* Question on front — large, centered */
+.cards-q-text {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 1.45;
+  margin: 20px 0;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Question on back — smaller, top */
+.cards-q-question-small {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #a8a8bc;
+  line-height: 1.4;
+  margin: 4px 0 8px;
+}
+
+/* Answer */
+.cards-q-answer {
+  font-size: 1.05rem;
+  color: #2ecc71;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.5;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.cards-q-check {
+  flex-shrink: 0;
+}
+
+.cards-q-letter {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-weight: 700;
+  color: #2ecc71;
+  flex-shrink: 0;
+}
+
+/* Hint */
+.cards-q-hint {
+  font-size: 0.9rem;
+  color: #a8a8bc;
+  margin: 4px 0 0;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.025);
+  border-left: 3px solid rgba(241, 196, 15, 0.35);
+  border-radius: 0 6px 6px 0;
+  line-height: 1.55;
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.cards-q-hint--empty {
+  color: #6a6a80;
+  font-style: italic;
+  border-left-color: rgba(255, 255, 255, 0.1);
+}
+
+.cards-q-bulb {
+  flex-shrink: 0;
+}
+
+/* Buttons */
+.cards-show-btn {
+  align-self: center;
+  margin-top: 8px;
+  margin-bottom: 4px;
+}
+
+.cards-hide-btn {
+  margin-top: auto;
+  align-self: flex-start;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #a8a8bc;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.cards-hide-btn:hover {
+  border-color: #f1c40f;
+  color: #f1c40f;
+}
+
+/* Navigation */
+.cards-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.cards-nav-btn {
+  flex: 1;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #e0e0ec;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.cards-nav-btn:hover:not(:disabled) {
+  border-color: #f1c40f;
+  color: #f1c40f;
+}
+
+.cards-nav-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .cards-card-wrapper,
+  .cards-card-inner {
+    min-height: 400px;
+  }
+
+  .cards-card {
+    padding: 22px 20px;
+  }
+
+  .cards-q-text {
+    font-size: 1.1rem;
+  }
+
+  .cards-q-question-small {
+    font-size: 0.9rem;
+  }
+
+  .cheatsheet-mode-btn {
+    padding: 8px 14px;
+    font-size: 0.85rem;
+  }
+}

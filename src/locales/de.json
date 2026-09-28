@@ -293,6 +293,15 @@
     "study": "Lernen",
     "open": "Lernen",
     "noHint": "Erklärung nicht verfügbar",
-    "backToTop": "Nach oben"
+    "backToTop": "Nach oben",
+
+    "modeReading": "Lesen",
+    "modeCards": "Karten",
+    "cardProgress": "Karte {{current}} / {{total}}",
+    "showAnswer": "Antwort zeigen",
+    "showQuestion": "Frage zeigen",
+    "answer": "Antwort",
+    "prev": "Zurück",
+    "next": "Weiter"
   }
 }
