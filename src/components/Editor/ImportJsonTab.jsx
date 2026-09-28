@@ -72,6 +72,11 @@ function repairJson(raw) {
   // 4. Collapse multiple commas
   s = s.replace(/,{2,}/g, ",");
 
+  // 4.5. Fix invalid escape sequences.
+  // Valid JSON escapes: " \ / b f n r t uXXXX
+  // Replace any other \X with just X (drop the broken backslash).
+  s = s.replace(/\\([^"\\/bfnrtu])/g, "$1");
+
   // 5. Balance braces / brackets by appending missing closers.
   // Counts only outside of strings — very lightweight scanner.
   let inString = false;

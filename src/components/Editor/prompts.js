@@ -82,6 +82,12 @@ HINT FIELD (REQUIRED)
 This is used for the CheatSheet learning mode — be clear and educational.
 Do NOT omit this field.
 
+ESCAPING
+- Use double quotes (") for all strings.
+- If a string contains a double quote, escape it as \" — but prefer
+  rewording to avoid quotes inside strings.
+- Do NOT use backslashes for anything else inside strings.
+
 === YOUR TASK ===
 
 Topic: {{TOPIC}}
@@ -162,6 +168,12 @@ HINT-FELD (ERFORDERLICH)
 Wird für den CheatSheet-Lernmodus verwendet — klar und lehrreich formulieren.
 Dieses Feld NICHT weglassen.
 
+ESCAPING
+- Use double quotes (") for all strings.
+- If a string contains a double quote, escape it as \" — but prefer
+  rewording to avoid quotes inside strings.
+- Do NOT use backslashes for anything else inside strings.
+
 === DEINE AUFGABE ===
 
 Thema: {{TOPIC}}
@@ -241,6 +253,12 @@ NNN — порядковий номер із провідними нулями.
 1–3 речення, що пояснюють, ЧОМУ відповідь правильна.
 Використовується в режимі навчання CheatSheet — формулюй чітко та повчально.
 НЕ пропускай це поле.
+
+ESCAPING
+- Use double quotes (") for all strings.
+- If a string contains a double quote, escape it as \" — but prefer
+  rewording to avoid quotes inside strings.
+- Do NOT use backslashes for anything else inside strings.
 
 === ТВОЄ ЗАВДАННЯ ===
 
@@ -340,6 +358,12 @@ HINT FIELD (REQUIRED)
 1–3 sentences explaining WHY the answer is correct.
 Used for the CheatSheet learning mode — do NOT omit.
 
+ESCAPING
+- Use double quotes (") for all strings.
+- If a string contains a double quote, escape it as \" — but prefer
+  rewording to avoid quotes inside strings.
+- Do NOT use backslashes for anything else inside strings.
+
 === PARAMETERS ===
 
 Language of questions and answers: {{LANGUAGE}}
@@ -430,6 +454,12 @@ HINT-FELD (ERFORDERLICH)
 1–3 Sätze, die erklären, WARUM die Antwort richtig ist.
 Wird für den CheatSheet-Lernmodus verwendet — NICHT weglassen.
 
+ESCAPING
+- Use double quotes (") for all strings.
+- If a string contains a double quote, escape it as \" — but prefer
+  rewording to avoid quotes inside strings.
+- Do NOT use backslashes for anything else inside strings.
+
 === PARAMETER ===
 
 Sprache der Fragen und Antworten: {{LANGUAGE}}
@@ -519,6 +549,12 @@ Letztes Zeichen: }`,
 ПОЛЕ HINT (ОБОВ'ЯЗКОВЕ)
 1–3 речення, що пояснюють, ЧОМУ відповідь правильна.
 Використовується для режиму навчання CheatSheet — НЕ пропускай.
+
+ESCAPING
+- Use double quotes (") for all strings.
+- If a string contains a double quote, escape it as \" — but prefer
+  rewording to avoid quotes inside strings.
+- Do NOT use backslashes for anything else inside strings.
 
 === ПАРАМЕТРИ ===
 
