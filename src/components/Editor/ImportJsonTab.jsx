@@ -192,7 +192,7 @@ export function ImportJsonTab() {
 
   // ── Prompt parameters ────────────────────────────────────────────
   const [topic, setTopic] = useState("");
-  const [count, setCount] = useState(COUNT_DEFAULT);
+  const [count, setCount] = useState(String(COUNT_DEFAULT));
   const [prefix, setPrefix] = useState("QUIZ");
   const [level, setLevel] = useState("intermediate");
 
@@ -223,7 +223,7 @@ export function ImportJsonTab() {
   const handleCopyPrompt = async () => {
     const filled = fillPrompt(currentPrompt, {
       TOPIC: topic.trim() || "General knowledge",
-      COUNT: String(count),
+      COUNT: count,
       PREFIX: (prefix.trim().toUpperCase() || "QUIZ").slice(0, 4),
       LANGUAGE: LANG_LABELS[effectiveLang] || "English",
       LEVEL: level,
@@ -330,6 +330,16 @@ export function ImportJsonTab() {
         setSubmitting(false);
         return;
       }
+      if (res.status === 409) {
+        setGlobalError(
+          t(
+            "editor.errors.duplicate",
+            "A quiz with this title already exists. Please use a different title.",
+          ),
+        );
+        setSubmitting(false);
+        return;
+      }
       if (res.status === 429) {
         const data = await res.json();
         setRetryAfter(data.retryAfter || 86400);
@@ -423,15 +433,20 @@ export function ImportJsonTab() {
               <label className="editor-label">
                 {t("editor.import.questionCount", "Questions")}
                 <input
-                  type="number"
+                  type="text"
+                  inputMode="numeric"
+                  pattern="[0-9]*"
                   className="editor-input"
-                  min={COUNT_MIN}
-                  max={COUNT_MAX}
-                  step={1}
+                  maxLength={2}
                   value={count}
                   onChange={(e) => {
-                    const v = Number(e.target.value) || COUNT_MIN;
-                    setCount(Math.min(COUNT_MAX, Math.max(COUNT_MIN, v)));
+                    const raw = e.target.value.replace(/\D/g, "");
+                    setCount(raw);
+                  }}
+                  onBlur={() => {
+                    const n = Number(count);
+                    if (!n || n < COUNT_MIN) setCount(String(COUNT_DEFAULT));
+                    else if (n > COUNT_MAX) setCount(String(COUNT_MAX));
                   }}
                 />
                 <span className="editor-hint-text">
@@ -478,7 +493,7 @@ export function ImportJsonTab() {
         </div>
 
         {/* Warning for large quizzes */}
-        {source === "text" && count >= 40 && (
+        {source === "text" && Number(count) >= 40 && (
           <p className="import-warning">
             ⚠️{" "}
             {t(

@@ -155,6 +155,17 @@ export function ManualTab() {
         return;
       }
 
+      if (res.status === 409) {
+        setGlobalError(
+          t(
+            "editor.errors.duplicate",
+            "A quiz with this title already exists. Please use a different title.",
+          ),
+        );
+        setSubmitting(false);
+        return;
+      }
+
       // ── 429: rate limit ──────────────────────────────────────────
       if (res.status === 429) {
         const data = await res.json();

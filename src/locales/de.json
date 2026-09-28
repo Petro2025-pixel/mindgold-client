@@ -278,6 +278,7 @@
     "errors": {
       "server": "Serverfehler. Bitte erneut versuchen.",
       "network": "Netzwerkfehler. Verbindung prüfen.",
+      "duplicate": "Ein Quiz mit diesem Titel existiert bereits. Bitte verwende einen anderen Titel.",
       "validationTitle": "Validierungsfehler"
     }
   }
