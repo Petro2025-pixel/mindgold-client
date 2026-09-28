@@ -90,6 +90,17 @@ Language of questions and answers: {{LANGUAGE}}
 Level: {{LEVEL}}
 ID prefix (4 uppercase letters): {{PREFIX}}
 
+=== JSON VALIDITY CHECK ===
+
+Before sending the response, verify:
+- All opening { and [ have matching closing } and ]
+- No trailing commas before } or ]
+- Every string is closed with a "
+- Every property is separated by a comma (except the last)
+- No comments, no markdown fences
+
+If the JSON is invalid, fix it BEFORE sending.
+
 === FINAL REMINDER ===
 Return the quiz as raw JSON text in the chat.
 DO NOT create a widget, artifact, or interactive quiz.
@@ -159,6 +170,17 @@ Sprache der Fragen und Antworten: {{LANGUAGE}}
 Niveau: {{LEVEL}}
 ID-Präfix (4 Großbuchstaben): {{PREFIX}}
 
+=== JSON VALIDITY CHECK ===
+
+Before sending the response, verify:
+- All opening { and [ have matching closing } and ]
+- No trailing commas before } or ]
+- Every string is closed with a "
+- Every property is separated by a comma (except the last)
+- No comments, no markdown fences
+
+If the JSON is invalid, fix it BEFORE sending.
+
 === LETZTE ERINNERUNG ===
 Gib das Quiz als reinen JSON-Text im Chat zurück.
 Erstelle KEIN Widget, KEIN Artefakt und KEIN interaktives Quiz.
@@ -227,6 +249,17 @@ NNN — порядковий номер із провідними нулями.
 Мова питань і відповідей: {{LANGUAGE}}
 Рівень: {{LEVEL}}
 Префікс ID (4 великі літери): {{PREFIX}}
+
+=== JSON VALIDITY CHECK ===
+
+Before sending the response, verify:
+- All opening { and [ have matching closing } and ]
+- No trailing commas before } or ]
+- Every string is closed with a "
+- Every property is separated by a comma (except the last)
+- No comments, no markdown fences
+
+If the JSON is invalid, fix it BEFORE sending.
 
 === ОСТАННЄ НАГАДУВАННЯ ===
 Поверни квіз як чистий текст JSON у чаті.
@@ -312,6 +345,17 @@ Used for the CheatSheet learning mode — do NOT omit.
 Language of questions and answers: {{LANGUAGE}}
 ID prefix (4 uppercase letters): {{PREFIX}}
 
+=== JSON VALIDITY CHECK ===
+
+Before sending the response, verify:
+- All opening { and [ have matching closing } and ]
+- No trailing commas before } or ]
+- Every string is closed with a "
+- Every property is separated by a comma (except the last)
+- No comments, no markdown fences
+
+If the JSON is invalid, fix it BEFORE sending.
+
 === FINAL REMINDER ===
 Return the quiz as raw JSON text in the chat.
 DO NOT create a widget, artifact, or interactive quiz.
@@ -391,6 +435,17 @@ Wird für den CheatSheet-Lernmodus verwendet — NICHT weglassen.
 Sprache der Fragen und Antworten: {{LANGUAGE}}
 ID-Präfix (4 Großbuchstaben): {{PREFIX}}
 
+=== JSON VALIDITY CHECK ===
+
+Before sending the response, verify:
+- All opening { and [ have matching closing } and ]
+- No trailing commas before } or ]
+- Every string is closed with a "
+- Every property is separated by a comma (except the last)
+- No comments, no markdown fences
+
+If the JSON is invalid, fix it BEFORE sending.
+
 === LETZTE ERINNERUNG ===
 Gib das Quiz als reinen JSON-Text im Chat zurück.
 Erstelle KEIN Widget, KEIN Artefakt und KEIN interaktives Quiz.
@@ -469,6 +524,17 @@ Letztes Zeichen: }`,
 
 Мова питань і відповідей: {{LANGUAGE}}
 Префікс ID (4 великі літери): {{PREFIX}}
+
+=== JSON VALIDITY CHECK ===
+
+Before sending the response, verify:
+- All opening { and [ have matching closing } and ]
+- No trailing commas before } or ]
+- Every string is closed with a "
+- Every property is separated by a comma (except the last)
+- No comments, no markdown fences
+
+If the JSON is invalid, fix it BEFORE sending.
 
 === ОСТАННЄ НАГАДУВАННЯ ===
 Поверни квіз як чистий текст JSON у чаті.

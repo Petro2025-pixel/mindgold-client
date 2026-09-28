@@ -40,12 +40,86 @@ const LANG_LABELS = {
 /* ─────────────────────────────────────────────────────────────────── */
 
 /**
- * Extracts the first JSON object from a string.
- * Handles:
- *   - Pure JSON
- *   - Markdown fences: ```json\n{...}\n```
- *   - Leading commentary: "Sure! Here is the JSON: {...}"
- *   - Wrapped single-element array: [{"quizTitle": ...}]
+ * Repairs common JSON syntax issues produced by AI models.
+ *
+ * Fixes:
+ *   1. Trailing commas before `}` or `]`     — `{"a":1,}` → `{"a":1}`
+ *   2. Multiple consecutive commas           — `,,` → `,`
+ *   3. Unbalanced braces / brackets          — appends missing closers
+ *   4. Trailing junk after the final bracket — sliced off
+ *
+ * Does NOT fix broken strings (unterminated quotes) — those require
+ * regeneration from the AI.
+ *
+ * @param {string} raw - Raw JSON-ish string.
+ * @returns {string} Cleaned-up JSON string (may still be invalid).
+ */
+function repairJson(raw) {
+  let s = raw;
+
+  // 1. Remove markdown code fences
+  s = s.replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/i, "");
+
+  // 2. Extract the outermost { ... } or [ ... ] block
+  const firstBrace = s.search(/[[{]/);
+  const lastBrace = Math.max(s.lastIndexOf("}"), s.lastIndexOf("]"));
+  if (firstBrace === -1 || lastBrace === -1) return s;
+  s = s.slice(firstBrace, lastBrace + 1);
+
+  // 3. Remove trailing commas before } or ]
+  s = s.replace(/,(\s*[}\]])/g, "$1");
+
+  // 4. Collapse multiple commas
+  s = s.replace(/,{2,}/g, ",");
+
+  // 5. Balance braces / brackets by appending missing closers.
+  // Counts only outside of strings — very lightweight scanner.
+  let inString = false;
+  let escaped = false;
+  let braceDepth = 0;
+  let bracketDepth = 0;
+
+  for (let i = 0; i < s.length; i++) {
+    const ch = s[i];
+
+    if (escaped) {
+      escaped = false;
+      continue;
+    }
+    if (ch === "\\" && inString) {
+      escaped = true;
+      continue;
+    }
+    if (ch === '"') {
+      inString = !inString;
+      continue;
+    }
+    if (inString) continue;
+
+    if (ch === "{") braceDepth++;
+    else if (ch === "}") braceDepth--;
+    else if (ch === "[") bracketDepth++;
+    else if (ch === "]") bracketDepth--;
+  }
+
+  // Append missing closers in reverse order of opening
+  while (bracketDepth > 0) {
+    s += "]";
+    bracketDepth--;
+  }
+  while (braceDepth > 0) {
+    s += "}";
+    braceDepth--;
+  }
+
+  return s;
+}
+
+/**
+ * Extracts and parses the first JSON object from a string.
+ *
+ * Attempts repair on failure: trailing commas, unbalanced braces, etc.
+ * Auto-unwraps a single-element array `[{...}]` → `{...}`.
  *
  * @param {string} text - Raw text from the user.
  * @returns {{ ok: true, data: any } | { ok: false, error: string }}
@@ -53,6 +127,7 @@ const LANG_LABELS = {
 function extractJson(text) {
   if (!text || !text.trim()) return { ok: false, error: "Empty input" };
 
+  // First attempt — clean
   let s = text.trim();
   s = s.replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/i, "");
 
@@ -66,8 +141,24 @@ function extractJson(text) {
   let parsed;
   try {
     parsed = JSON.parse(s);
-  } catch (e) {
-    return { ok: false, error: `Invalid JSON: ${e.message}` };
+  } catch (firstError) {
+    // Second attempt — repair
+    const repaired = repairJson(s);
+    try {
+      parsed = JSON.parse(repaired);
+    } catch (secondError) {
+      // Still broken — show position from the ORIGINAL error
+      const posMatch = firstError.message.match(/position (\d+)/);
+      const pos = posMatch ? Number(posMatch[1]) : -1;
+      const ctx =
+        pos >= 0 && pos < s.length
+          ? `…${s.slice(Math.max(0, pos - 25), pos + 25)}…`
+          : "";
+      return {
+        ok: false,
+        error: `Invalid JSON (auto-repair failed): ${firstError.message}${ctx ? ` — near "${ctx}"` : ""}`,
+      };
+    }
   }
 
   if (Array.isArray(parsed)) {
