@@ -242,14 +242,13 @@ function validateQuiz(data) {
  * Called before copying the prompt, so the AI receives a fully filled task.
  *
  * @param {string} raw - Raw prompt with placeholders.
- * @param {object} values - { TOPIC, COUNT, PREFIX, LANGUAGE, LEVEL }
+ * @param {object} values - { TOPIC, COUNT, LANGUAGE, LEVEL }
  * @returns {string}
  */
 function fillPrompt(raw, values) {
   return raw
     .replace(/\{\{TOPIC\}\}/g, values.TOPIC)
     .replace(/\{\{COUNT\}\}/g, values.COUNT)
-    .replace(/\{\{PREFIX\}\}/g, values.PREFIX)
     .replace(/\{\{LANGUAGE\}\}/g, values.LANGUAGE)
     .replace(/\{\{LEVEL\}\}/g, values.LEVEL);
 }
@@ -266,7 +265,7 @@ function fillPrompt(raw, values) {
  *   - screenshot: user provides an image → vision AI extracts + generates
  *
  * Flow:
- *   1. Fill in Topic, Question count, ID prefix, Level, Quiz language.
+ *   1. Fill in Topic, Question count, Level, Quiz language.
  *   2. Copy the fully populated prompt (placeholders replaced).
  *   3. Paste into ChatGPT / Claude / Gemini, get JSON back.
  *   4. Paste the JSON into the textarea below.
@@ -289,7 +288,6 @@ export function ImportJsonTab() {
   // ── Prompt parameters ────────────────────────────────────────────
   const [topic, setTopic] = useState("");
   const [count, setCount] = useState(String(COUNT_DEFAULT));
-  const [prefix, setPrefix] = useState("QUIZ");
   const [level, setLevel] = useState("intermediate");
 
   // ── JSON + category ──────────────────────────────────────────────
@@ -320,7 +318,6 @@ export function ImportJsonTab() {
     const filled = fillPrompt(currentPrompt, {
       TOPIC: topic.trim() || "General knowledge",
       COUNT: count,
-      PREFIX: (prefix.trim().toUpperCase() || "QUIZ").slice(0, 4),
       LANGUAGE: LANG_LABELS[effectiveLang] || "English",
       LEVEL: level,
     });
@@ -566,26 +563,6 @@ export function ImportJsonTab() {
               </label>
             </>
           )}
-
-          {/* ID prefix — always visible */}
-          <label className="editor-label">
-            {t("editor.import.prefix", "ID prefix")}
-            <input
-              type="text"
-              className="editor-input"
-              value={prefix}
-              onChange={(e) =>
-                setPrefix(
-                  e.target.value
-                    .toUpperCase()
-                    .replace(/[^A-Z]/g, "")
-                    .slice(0, 4),
-                )
-              }
-              placeholder="QUIZ"
-              maxLength={4}
-            />
-          </label>
         </div>
 
         {/* Warning for large quizzes */}

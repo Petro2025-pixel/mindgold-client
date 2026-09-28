@@ -62,9 +62,10 @@ TAGS FIELD
 1–4 short lowercase tags summarizing the quiz topic (e.g. ["csharp", "basics", "linq"]).
 
 ID FIELD
-Format: PRFX-NNN, where PRFX is a 4-letter uppercase code for the topic
-and NNN is a zero-padded sequential number.
-Example: "Rektion der Verben" → REKT-001, REKT-002, ...
+Generate a 4-letter uppercase prefix from the quiz topic
+(e.g. "C# GUI basics" → CGUI, "Rektion der Verben" → REKT).
+Format: PRFX-NNN with a zero-padded sequential number.
+Example: CGUI-001, CGUI-002, ...
 
 QUESTION FIELD
 Clear, unambiguous phrasing. No duplicate questions.
@@ -94,7 +95,7 @@ Topic: {{TOPIC}}
 Number of questions: {{COUNT}}
 Language of questions and answers: {{LANGUAGE}}
 Level: {{LEVEL}}
-ID prefix (4 uppercase letters): {{PREFIX}}
+
 
 === JSON VALIDITY CHECK ===
 
@@ -148,9 +149,10 @@ TAGS-FELD
 1–4 kurze Tags in Kleinbuchstaben, die das Quizthema zusammenfassen (z.B. ["csharp", "grundlagen", "linq"]).
 
 ID-FELD
-Format: PRFX-NNN, wobei PRFX ein 4-Buchstaben-Code in Großbuchstaben für das Thema ist
-und NNN eine fortlaufende Nummer mit führenden Nullen.
-Beispiel: "Rektion der Verben" → REKT-001, REKT-002, ...
+Generiere ein 4-Buchstaben-Präfix in Großbuchstaben aus dem Quizthema
+(z.B. "C# GUI Grundlagen" → CGUI, "Rektion der Verben" → REKT).
+Format: PRFX-NNN mit fortlaufender Nummer und führenden Nullen.
+Beispiel: CGUI-001, CGUI-002, ...
 
 QUESTION-FELD
 Klare, eindeutige Formulierung. Keine doppelten Fragen.
@@ -180,7 +182,7 @@ Thema: {{TOPIC}}
 Anzahl der Fragen: {{COUNT}}
 Sprache der Fragen und Antworten: {{LANGUAGE}}
 Niveau: {{LEVEL}}
-ID-Präfix (4 Großbuchstaben): {{PREFIX}}
+
 
 === JSON VALIDITY CHECK ===
 
@@ -234,9 +236,10 @@ Letztes Zeichen: }`,
 1–4 короткі теги малими літерами, що описують тему квіза (напр. ["csharp", "основи", "linq"]).
 
 ПОЛЕ ID
-Формат: PRFX-NNN, де PRFX — 4 великі літери теми,
-NNN — порядковий номер із провідними нулями.
-Приклад: "Rektion der Verben" → REKT-001, REKT-002, ...
+Згенеруй 4-літерний префікс великими літерами з теми квіза
+(напр. "C# GUI основи" → CGUI, "Rektion der Verben" → REKT).
+Формат: PRFX-NNN із порядковим номером і провідними нулями.
+Приклад: CGUI-001, CGUI-002, ...
 
 ПОЛЕ QUESTION
 Чітке, однозначне формулювання. Без дублікатів питань.
@@ -266,7 +269,6 @@ ESCAPING
 Кількість питань: {{COUNT}}
 Мова питань і відповідей: {{LANGUAGE}}
 Рівень: {{LEVEL}}
-Префікс ID (4 великі літери): {{PREFIX}}
 
 === JSON VALIDITY CHECK ===
 
@@ -345,8 +347,10 @@ TAGS FIELD
 1–4 short lowercase tags summarizing the topic (e.g. ["german", "b1", "grammar"]).
 
 ID FIELD
-Format: PRFX-NNN (4-letter uppercase prefix + zero-padded number).
-Example: BILD-001, BILD-002, ...
+Generate a 4-letter uppercase prefix from the quiz topic
+(e.g. "German B1 Grammar" → GRAM, "C# GUI basics" → CGUI).
+Format: PRFX-NNN with a zero-padded sequential number.
+Example: GRAM-001, GRAM-002, ...
 
 ANSWERS FIELD
 Array of 2–4 plausible options. Randomize the correct answer position.
@@ -367,7 +371,7 @@ ESCAPING
 === PARAMETERS ===
 
 Language of questions and answers: {{LANGUAGE}}
-ID prefix (4 uppercase letters): {{PREFIX}}
+
 
 === JSON VALIDITY CHECK ===
 
@@ -441,8 +445,10 @@ TAGS-FELD
 1–4 kurze Tags in Kleinbuchstaben (z.B. ["deutsch", "b1", "grammatik"]).
 
 ID-FELD
-Format: PRFX-NNN (4 Großbuchstaben + fortlaufende Nummer).
-Beispiel: BILD-001, BILD-002, ...
+Generiere ein 4-Buchstaben-Präfix in Großbuchstaben aus dem Quizthema
+(z.B. "Deutsch B1 Grammatik" → GRAM, "C# GUI Grundlagen" → CGUI).
+Format: PRFX-NNN mit fortlaufender Nummer und führenden Nullen.
+Beispiel: GRAM-001, GRAM-002, ...
 
 ANSWERS-FELD
 Array mit 2–4 plausiblen Optionen. Richtige Antwort zufällig verteilen.
@@ -463,7 +469,7 @@ ESCAPING
 === PARAMETER ===
 
 Sprache der Fragen und Antworten: {{LANGUAGE}}
-ID-Präfix (4 Großbuchstaben): {{PREFIX}}
+
 
 === JSON VALIDITY CHECK ===
 
@@ -537,8 +543,10 @@ Letztes Zeichen: }`,
 1–4 короткі теги малими літерами (напр. ["німецька", "b1", "граматика"]).
 
 ПОЛЕ ID
-Формат: PRFX-NNN (4 великі літери + порядковий номер із нулями).
-Приклад: BILD-001, BILD-002, ...
+Згенеруй 4-літерний префікс великими літерами з теми квіза
+(напр. "Німецька B1 Граматика" → GRAM, "C# GUI основи" → CGUI).
+Формат: PRFX-NNN із порядковим номером і провідними нулями.
+Приклад: GRAM-001, GRAM-002, ...
 
 ПОЛЕ ANSWERS
 Масив 2–4 правдоподібних варіантів. Правильну відповідь розподіляй випадково.
@@ -559,7 +567,6 @@ ESCAPING
 === ПАРАМЕТРИ ===
 
 Мова питань і відповідей: {{LANGUAGE}}
-Префікс ID (4 великі літери): {{PREFIX}}
 
 === JSON VALIDITY CHECK ===
 
