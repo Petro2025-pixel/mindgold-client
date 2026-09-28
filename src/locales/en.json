@@ -281,5 +281,18 @@
       "duplicate": "A quiz with this title already exists. Please use a different title.",
       "validationTitle": "Validation errors"
     }
+  },
+  "cheatsheet": {
+    "title": "CheatSheet",
+    "subtitle": "Study and review quizzes at your own pace",
+    "loading": "Loading…",
+    "error": "Failed to load",
+    "empty": "No quizzes in this category yet.",
+    "quizCount": "{{count}} quizzes",
+    "questionCount": "{{count}} questions",
+    "study": "Study",
+    "open": "Study",
+    "noHint": "Explanation not available",
+    "backToTop": "Back to top"
   }
 }

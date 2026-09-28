@@ -16,6 +16,9 @@ import CategoryList from "./components/CategoryList/CategoryList";
 import Leaderboard from "./components/Leaderboard/Leaderboard";
 import AboutPage from "./components/About/AboutPage";
 import EditorPage from "./components/Editor/EditorPage";
+import CheatSheetCategories from "./components/CheatSheet/CheatSheetCategories";
+import CheatSheetQuizList from "./components/CheatSheet/CheatSheetQuizList";
+import CheatSheetQuiz from "./components/CheatSheet/CheatSheetQuiz";
 import { AuthProvider } from "./context/AuthContext";
 import "./index.css";
 
@@ -89,6 +92,15 @@ export default function App() {
             <Route path="/leaderboard" element={<Leaderboard />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/editor" element={<EditorPage />} />
+
+            {/* CheatSheet — study mode (3 levels) */}
+            <Route path="/cheatsheet" element={<CheatSheetCategories />} />
+            <Route
+              path="/cheatsheet/category/:category"
+              element={<CheatSheetQuizList />}
+            />
+            <Route path="/cheatsheet/:slug" element={<CheatSheetQuiz />} />
+
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </main>

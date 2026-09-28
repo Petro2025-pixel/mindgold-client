@@ -281,5 +281,18 @@
       "duplicate": "Ein Quiz mit diesem Titel existiert bereits. Bitte verwende einen anderen Titel.",
       "validationTitle": "Validierungsfehler"
     }
+  },
+  "cheatsheet": {
+    "title": "Spickzettel",
+    "subtitle": "Lerne und wiederhole Quizze in deinem eigenen Tempo",
+    "loading": "Wird geladen…",
+    "error": "Konnte nicht geladen werden",
+    "empty": "Noch keine Quizze in dieser Kategorie.",
+    "quizCount": "{{count}} Quizze",
+    "questionCount": "{{count}} Fragen",
+    "study": "Lernen",
+    "open": "Lernen",
+    "noHint": "Erklärung nicht verfügbar",
+    "backToTop": "Nach oben"
   }
 }
